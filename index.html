@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sq">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ServerKode — We Build Digital Excellence</title>
+  <title>ServerKode — Ndërtojmë Përsosmëri Digjitale</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -151,82 +151,77 @@
       color: var(--premium-white);
     }
 
-    /* Mobile toggle */
+    /* Mobile toggle — simple 2-line */
     .sk-burger {
       display: none;
-      width: 44px;
-      height: 44px;
-      background: rgba(241, 236, 226, 0.04);
-      border: 1px solid rgba(241, 236, 226, 0.18);
-      border-radius: 10px;
+      width: 42px;
+      height: 42px;
+      background: transparent;
+      border: none;
       cursor: pointer;
       padding: 0;
       position: relative;
-      transition: background .25s ease, border-color .25s ease, transform .2s ease;
+      border-radius: 50%;
+      transition: background .25s ease, transform .2s ease;
     }
-
-    .sk-burger:hover {
-      background: rgba(241, 236, 226, 0.09);
-      border-color: rgba(241, 236, 226, 0.35);
-    }
-
-    .sk-burger:active { transform: scale(0.96); }
-
-    .sk-burger__lines,
-    .sk-burger__lines::before,
-    .sk-burger__lines::after {
-      position: absolute;
-      left: 50%;
-      width: 20px;
-      height: 2px;
-      background: var(--premium-white);
-      border-radius: 2px;
-      transition: transform .3s ease, top .25s ease, opacity .2s ease, width .25s ease;
-    }
+    .sk-burger:hover { background: rgba(241, 236, 226, 0.08); }
+    .sk-burger:active { transform: scale(0.92); }
 
     .sk-burger__lines {
+      position: absolute;
       top: 50%;
+      left: 50%;
+      width: 24px;
+      height: 16px;
       transform: translate(-50%, -50%);
+      background: transparent;
     }
 
+    /* Two angle brackets:  <  and  >  */
     .sk-burger__lines::before,
     .sk-burger__lines::after {
       content: "";
-      left: 0;
+      position: absolute;
+      top: 50%;
+      width: 9px;
+      height: 9px;
+      border: 2px solid var(--premium-white);
+      border-right: none;
+      border-top: none;
+      transition: transform .35s cubic-bezier(.4,.0,.2,1),
+                  left .35s cubic-bezier(.4,.0,.2,1),
+                  right .35s cubic-bezier(.4,.0,.2,1);
     }
-    .sk-burger__lines::before { top: -7px; width: 14px; }
-    .sk-burger__lines::after  { top:  7px; width: 16px; }
-
-    .sk-burger:hover .sk-burger__lines::before,
-    .sk-burger:hover .sk-burger__lines::after { width: 20px; }
-
-    /* Open / active state -> X */
-    .sk-burger.is-open .sk-burger__lines {
-      background: transparent;
+    /* left bracket "<" */
+    .sk-burger__lines::before {
+      left: 1px;
+      transform: translateY(-50%) rotate(45deg);
     }
+    /* right bracket ">" */
+    .sk-burger__lines::after {
+      right: 1px;
+      transform: translateY(-50%) rotate(-135deg);
+    }
+
+    /* Open -> X (brackets slide to center and rotate) */
     .sk-burger.is-open .sk-burger__lines::before {
-      top: 0;
-      width: 20px;
-      transform: rotate(45deg);
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
     }
     .sk-burger.is-open .sk-burger__lines::after {
-      top: 0;
-      width: 20px;
-      transform: rotate(-45deg);
+      right: 50%;
+      transform: translate(50%, -50%) rotate(45deg);
     }
 
     /* ---------- MOBILE MENU ---------- */
     .sk-mobile {
       position: fixed;
-      top: 76px;            /* below the header */
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;             /* full page */
       z-index: 90;
       background: linear-gradient(180deg, rgba(4,8,22,0.98) 0%, rgba(10,19,48,0.98) 100%);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      padding: 40px 28px 48px;
+      padding: 110px 28px 48px;   /* top padding clears the header */
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -338,10 +333,23 @@
       .sk-header__inner { padding: 10px 14px; gap: 10px; }
       .sk-nav, .sk-cta { display: none; }
       .sk-burger { display: inline-flex; width: 36px; height: 36px; }
-      .sk-brand { gap: 8px; }
+      .sk-brand { gap: 10px; min-width: 0; }
       .sk-brand__mark { width: 46px; height: 46px; }
-      .sk-brand__name { font-size: 14px; letter-spacing: 2px; }
-      .sk-brand__tagline { display: none; }
+      .sk-brand__text { min-width: 0; }
+      .sk-brand__name { font-size: 13px; letter-spacing: 2px; white-space: nowrap; }
+      .sk-brand__tagline {
+        display: block;
+        font-size: 7px;
+        letter-spacing: 1.6px;
+        margin-top: 5px;
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .sk-brand__name { font-size: 12px; letter-spacing: 1.6px; }
+      .sk-brand__tagline { font-size: 6.5px; letter-spacing: 1.3px; }
+      .sk-brand__mark { width: 40px; height: 40px; }
     }
 
 
@@ -739,10 +747,551 @@
       .sk-about__label::after { display: none; }
       .sk-about__head { grid-template-columns: 1fr; gap: 28px; margin-bottom: 56px; }
       .sk-values { grid-template-columns: repeat(2, 1fr); }
-      .sk-value { padding: 32px 24px 36px; }
+      .sk-value { padding: 28px 18px 32px; min-width: 0; }
+      .sk-value__title {
+        font-size: 13px;
+        letter-spacing: 1.5px;
+        word-break: break-word;
+      }
+      .sk-value__text { font-size: 13px; line-height: 1.6; }
+      .sk-value__icon { width: 36px; height: 36px; margin-bottom: 18px; }
+      .sk-value__num { margin-bottom: 20px; }
       .sk-stats { grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 56px; }
     }
 
+    /* ---------- PROJECTS ---------- */
+    .sk-projects {
+      position: relative;
+      background: var(--dark-midnight);
+      padding: 130px 0 140px;
+      overflow: hidden;
+    }
+
+    .sk-projects::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 10% 20%, rgba(74, 124, 255, 0.08) 0%, transparent 45%),
+        radial-gradient(ellipse at 90% 90%, rgba(10, 19, 48, 0.6) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .sk-projects__inner {
+      position: relative;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 40px;
+    }
+
+    .sk-projects__label {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--steel-gray);
+      align-self: start;
+      padding-top: 8px;
+    }
+
+    .sk-projects__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 40px;
+      margin-bottom: 72px;
+    }
+
+    .sk-projects__title {
+      font-size: clamp(32px, 4.2vw, 52px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .sk-projects__title em {
+      font-style: normal;
+      color: var(--steel-gray);
+      font-weight: 400;
+    }
+
+    .sk-projects__sub {
+      font-size: 14px;
+      color: var(--steel-gray);
+      max-width: 320px;
+      line-height: 1.7;
+      text-align: right;
+    }
+
+    /* Project list */
+    .sk-projlist {
+      position: relative;
+      border-top: 1px solid rgba(167, 175, 189, 0.18);
+    }
+
+    .sk-proj {
+      position: relative;
+      display: grid;
+      grid-template-columns: 60px 110px minmax(0, 1fr) auto 40px;
+      align-items: center;
+      gap: 24px;
+      padding: 28px 8px;
+      border-bottom: 1px solid rgba(167, 175, 189, 0.18);
+      color: var(--premium-white);
+      text-decoration: none;
+      transition: padding .35s ease, color .25s ease;
+    }
+
+    /* Tablet: tighten the grid so long names don't overflow */
+    @media (max-width: 1024px) and (min-width: 768px) {
+      .sk-projects { padding: 100px 0 110px; }
+      .sk-projects__inner { padding: 0 24px; gap: 28px; grid-template-columns: 60px 1fr; }
+      .sk-projects__head { gap: 28px; margin-bottom: 56px; }
+      .sk-projects__sub { max-width: 260px; font-size: 13px; }
+      .sk-proj {
+        grid-template-columns: 44px 80px minmax(0, 1fr) auto 36px;
+        gap: 16px;
+        padding: 22px 6px;
+      }
+      .sk-proj__num  { font-size: 12px; }
+      .sk-proj__year { font-size: 11px; }
+      .sk-proj__name { font-size: clamp(18px, 2.6vw, 26px); }
+      .sk-proj__cat  { font-size: 10px; padding: 5px 10px; letter-spacing: 2px; }
+      .sk-proj__arrow { width: 36px; height: 36px; }
+      .sk-projlist__preview { width: 220px; height: 160px; }
+    }
+    .sk-proj::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(74, 124, 255, 0.06), transparent 40%);
+      opacity: 0;
+      transition: opacity .35s ease;
+      pointer-events: none;
+    }
+    .sk-proj:hover { padding-left: 24px; }
+    .sk-proj:hover::before { opacity: 1; }
+
+    .sk-proj__num {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--steel-gray);
+      transition: color .25s ease;
+    }
+    .sk-proj:hover .sk-proj__num { color: var(--premium-white); }
+
+    .sk-proj__thumb { display: none; }
+
+    .sk-proj__year {
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: var(--steel-gray);
+    }
+
+    .sk-proj__name {
+      font-size: clamp(18px, 2.4vw, 32px);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      line-height: 1.1;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .sk-proj__cat {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--steel-gray);
+      padding: 6px 12px;
+      border: 1px solid rgba(167, 175, 189, 0.25);
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .sk-proj__arrow {
+      width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(167, 175, 189, 0.25);
+      border-radius: 50%;
+      transition: background .25s ease, border-color .25s ease, transform .25s ease;
+    }
+    .sk-proj__arrow svg {
+      width: 16px;
+      height: 16px;
+      transition: transform .3s ease;
+    }
+    .sk-proj:hover .sk-proj__arrow {
+      background: var(--premium-white);
+      border-color: var(--premium-white);
+      color: var(--dark-midnight);
+    }
+    .sk-proj:hover .sk-proj__arrow svg {
+      transform: translate(2px, -2px);
+    }
+
+    /* Floating preview thumbnail (desktop) */
+    .sk-projlist__preview {
+      position: absolute;
+      pointer-events: none;
+      width: 280px;
+      height: 200px;
+      border-radius: 8px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.9);
+      transition: opacity .25s ease, transform .35s cubic-bezier(.22,.61,.36,1);
+      z-index: 5;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      border: 1px solid rgba(167, 175, 189, 0.2);
+    }
+    .sk-projlist__preview.is-visible {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .sk-projlist__preview-item {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity .25s ease;
+      background: var(--deep-navy);
+    }
+    .sk-projlist__preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .sk-projlist__preview-item.is-active { opacity: 1; }
+
+    /* Footer link */
+    .sk-projects__more {
+      margin-top: 48px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--premium-white);
+      text-decoration: none;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--premium-white);
+      transition: gap .25s ease, opacity .25s ease;
+    }
+    .sk-projects__more:hover { gap: 18px; }
+
+    @media (max-width: 767px) {
+      .sk-projects { padding: 80px 0 100px; }
+      .sk-projects__inner { grid-template-columns: 1fr; gap: 24px; padding: 0 24px; }
+      .sk-projects__label { writing-mode: horizontal-tb; transform: none; padding: 0; }
+      .sk-projects__head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 40px;
+      }
+      .sk-projects__sub { text-align: left; }
+
+      .sk-proj {
+        grid-template-columns: 72px auto auto 1fr 34px;
+        grid-template-areas:
+          "thumb  year   cat    .     arrow"
+          "thumb  name   name   name  arrow";
+        row-gap: 6px;
+        column-gap: 10px;
+        padding: 18px 4px;
+        align-items: center;
+      }
+      .sk-proj:hover { padding-left: 4px; }
+
+      /* Show thumbnail on mobile via ::before background */
+      .sk-proj__thumb {
+        grid-area: thumb;
+        width: 72px;
+        height: 72px;
+        border-radius: 8px;
+        overflow: hidden;
+        background: var(--deep-navy);
+        border: 1px solid rgba(167, 175, 189, 0.18);
+        display: block;
+      }
+      .sk-proj__thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .sk-proj__num {
+        display: none;
+      }
+      .sk-proj__name  {
+        grid-area: name;
+        font-size: 17px;
+        letter-spacing: 0.8px;
+        line-height: 1.15;
+      }
+      .sk-proj__arrow {
+        grid-area: arrow;
+        width: 34px;
+        height: 34px;
+      }
+      .sk-proj__arrow svg { width: 14px; height: 14px; }
+
+      /* Meta row: year · category */
+      .sk-proj__year,
+      .sk-proj__cat {
+        font-size: 10px;
+        letter-spacing: 1.8px;
+        color: var(--steel-gray);
+        text-transform: uppercase;
+        padding: 0;
+        border: none;
+        border-radius: 0;
+        white-space: nowrap;
+        align-self: end;
+      }
+      .sk-proj__year {
+        grid-area: year;
+        padding-right: 10px;
+        border-right: 1px solid rgba(167, 175, 189, 0.25);
+      }
+      .sk-proj__cat {
+        grid-area: cat;
+      }
+
+      .sk-projlist__preview { display: none; }
+    }
+
+    /* ---------- CONTACT ---------- */
+    .sk-contact {
+      position: relative;
+      overflow: hidden;
+      background: var(--deep-navy);
+      padding: 130px 0 0;
+    }
+
+    .sk-contact__glow {
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(74, 124, 255, 0.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .sk-contact__inner {
+      position: relative;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 40px;
+    }
+
+    .sk-contact__label {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--steel-gray);
+      align-self: start;
+      padding-top: 8px;
+    }
+
+    .sk-contact__head {
+      max-width: 760px;
+      margin-bottom: 80px;
+    }
+
+    .sk-contact__eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--steel-gray);
+      padding: 8px 14px;
+      border: 1px solid rgba(167, 175, 189, 0.25);
+      border-radius: 999px;
+      margin-bottom: 28px;
+    }
+
+    .sk-contact__title {
+      font-size: clamp(40px, 6vw, 84px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .sk-contact__title em {
+      font-style: normal;
+      color: var(--steel-gray);
+      font-weight: 400;
+    }
+
+    /* Contact grid */
+    .sk-contact__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(167, 175, 189, 0.15);
+      border: 1px solid rgba(167, 175, 189, 0.15);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .sk-contact__card {
+      position: relative;
+      background: var(--deep-navy);
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      color: var(--premium-white);
+      text-decoration: none;
+      transition: background .35s ease, transform .35s ease;
+      overflow: hidden;
+    }
+
+    .sk-contact__card::after {
+      content: "↗";
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-size: 20px;
+      color: var(--steel-gray);
+      transition: color .25s ease, transform .3s ease;
+    }
+
+    .sk-contact__card:hover {
+      background: #0d1a3d;
+    }
+    .sk-contact__card:hover::after {
+      color: var(--premium-white);
+      transform: translate(3px, -3px);
+    }
+    .sk-contact__card:hover .sk-contact__icon {
+      transform: translateY(-3px);
+      color: var(--premium-white);
+    }
+
+    .sk-contact__icon {
+      width: 38px;
+      height: 38px;
+      color: var(--steel-gray);
+      transition: transform .35s ease, color .35s ease;
+    }
+    .sk-contact__icon svg { width: 100%; height: 100%; display: block; }
+
+    .sk-contact__caption {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--steel-gray);
+    }
+
+    .sk-contact__value {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--premium-white);
+      line-height: 1.3;
+      word-break: break-word;
+    }
+
+    .sk-contact__hint {
+      font-size: 11px;
+      color: var(--steel-gray);
+      margin-top: -6px;
+    }
+
+    /* Footer-ish bottom strip */
+    .sk-contact__bottom {
+      margin-top: 80px;
+      border-top: 1px solid rgba(167, 175, 189, 0.15);
+      padding: 32px 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .sk-contact__brand {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--steel-gray);
+    }
+    .sk-contact__brand strong { color: var(--premium-white); font-weight: 700; }
+
+    .sk-contact__socials {
+      display: flex;
+      gap: 12px;
+    }
+    .sk-contact__social {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(167, 175, 189, 0.25);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--steel-gray);
+      text-decoration: none;
+      transition: background .25s ease, border-color .25s ease, color .25s ease, transform .2s ease;
+    }
+    .sk-contact__social svg { width: 16px; height: 16px; }
+    .sk-contact__social:hover {
+      background: var(--premium-white);
+      border-color: var(--premium-white);
+      color: var(--dark-midnight);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 1024px) and (min-width: 768px) {
+      .sk-contact { padding: 100px 0 0; }
+      .sk-contact__inner { grid-template-columns: 60px 1fr; padding: 0 24px; }
+      .sk-contact__head { margin-bottom: 56px; }
+      .sk-contact__card { padding: 32px 24px; gap: 14px; }
+      .sk-contact__value { font-size: 15px; }
+    }
+
+    @media (max-width: 767px) {
+      .sk-contact { padding: 80px 0 0; }
+      .sk-contact__inner { grid-template-columns: 1fr; padding: 0 24px; gap: 24px; }
+      .sk-contact__label { writing-mode: horizontal-tb; transform: none; padding: 0; }
+      .sk-contact__head { margin-bottom: 40px; }
+      .sk-contact__title { font-size: clamp(36px, 11vw, 56px); }
+      .sk-contact__grid { grid-template-columns: 1fr; }
+      .sk-contact__card { padding: 28px 22px; gap: 14px; }
+      .sk-contact__card::after { top: 22px; right: 22px; font-size: 18px; }
+      .sk-contact__icon { width: 32px; height: 32px; }
+      .sk-contact__value { font-size: 17px; }
+      .sk-contact__bottom { margin-top: 56px; padding: 24px 0 32px; }
+    }
   </style>
 </head>
 <body>
@@ -757,20 +1306,20 @@
 
         <span class="sk-brand__text">
           <span class="sk-brand__name">SERVER<span>KODE</span></span>
-          <span class="sk-brand__tagline">We Build Digital Excellence</span>
+          <span class="sk-brand__tagline">Ndërtojmë Përsosmëri Digjitale</span>
         </span>
       </a>
 
       <!-- Navigation -->
       <nav class="sk-nav" aria-label="Primary">
-        <a href="#home"     class="sk-nav__link is-active">Home</a>
-        <a href="#about"    class="sk-nav__link">About</a>
-        <a href="#projects" class="sk-nav__link">Projects</a>
-        <a href="#contact"  class="sk-nav__link">Contact</a>
+        <a href="#home"     class="sk-nav__link is-active">Ballina</a>
+        <a href="#about"    class="sk-nav__link">Rreth Nesh</a>
+        <a href="#projects" class="sk-nav__link">Projektet</a>
+        <a href="#contact"  class="sk-nav__link">Kontakt</a>
       </nav>
 
       <!-- CTA -->
-      <a href="#contact" class="sk-cta">Get a Quote</a>
+      <a href="#contact" class="sk-cta">Kërko Ofertë</a>
 
       <!-- Mobile -->
       <button class="sk-burger" aria-label="Open menu" aria-expanded="false">
@@ -782,14 +1331,14 @@
   <!-- Mobile slide-in menu -->
   <div class="sk-mobile" id="sk-mobile" aria-hidden="true">
     <nav class="sk-mobile__nav" aria-label="Mobile">
-      <a href="#home"     class="sk-mobile__link">Home</a>
-      <a href="#about"    class="sk-mobile__link">About</a>
-      <a href="#projects" class="sk-mobile__link">Projects</a>
-      <a href="#contact"  class="sk-mobile__link">Contact</a>
+      <a href="#home"     class="sk-mobile__link">Ballina</a>
+      <a href="#about"    class="sk-mobile__link">Rreth Nesh</a>
+      <a href="#projects" class="sk-mobile__link">Projektet</a>
+      <a href="#contact"  class="sk-mobile__link">Kontakt</a>
     </nav>
     <div class="sk-mobile__footer">
-      <a href="#contact" class="sk-mobile__cta">Get a Quote</a>
-      <div class="sk-mobile__meta">ServerKode · Design · Performance · Security</div>
+      <a href="#contact" class="sk-mobile__cta">Kërko Ofertë</a>
+      <div class="sk-mobile__meta">ServerKode · Dizajn · Performancë · Siguri</div>
     </div>
   </div>
 
@@ -798,15 +1347,15 @@
     <div class="sk-hero__inner">
       <div class="sk-hero__content">
         <h1 class="sk-hero__title">
-          <span>Modern Websites</span>
-          <span>Powerful Results</span>
+          <span>Website Moderne</span>
+          <span>Rezultate të Fuqishme</span>
         </h1>
         <p class="sk-hero__lead">
-          We create fast, secure and professional websites that help your business grow.
+          ServerKode ndërton website moderne, të shpejta dhe profesionale që ndihmojnë biznesnet të rriten online.
         </p>
         <div class="sk-hero__actions">
-          <a href="#services" class="sk-btn sk-btn--primary">Our Services</a>
-          <a href="#contact"  class="sk-btn sk-btn--ghost">Contact Us</a>
+          <a href="#projects" class="sk-btn sk-btn--primary">Projektet Tona</a>
+          <a href="#contact"  class="sk-btn sk-btn--ghost">Na Kontakto</a>
         </div>
       </div>
 
@@ -823,19 +1372,19 @@
     <div class="sk-about__watermark" aria-hidden="true">SK</div>
 
     <div class="sk-about__inner">
-      <div class="sk-about__label">About — 01 / Brand</div>
+      <div class="sk-about__label">Rreth Nesh — 01 / Brendi</div>
 
       <div>
         <div class="sk-about__head">
           <h2 class="sk-about__title">
-            We build digital<br/>
-            experiences that <em>perform.</em>
+            Ndërtojmë eksperienca<br/>
+            digjitale që <em>performojnë.</em>
           </h2>
           <p class="sk-about__copy">
-            <strong>ServerKode</strong> crafts modern, fast and secure websites
-            that help businesses grow online. From clean design to reliable
-            performance, every project is engineered with intention —
-            <strong>Design. Performance. Security.</strong>
+            <strong>ServerKode</strong> krijon website moderne, të shpejta dhe
+            të sigurta që ndihmojnë biznesnet të rriten online. Nga dizajni i
+            pastër te performanca e besueshme, çdo projekt ndërtohet me qëllim —
+            <strong>Dizajn. Performancë. Siguri.</strong>
           </p>
         </div>
 
@@ -849,8 +1398,8 @@
                 <path d="m9 12 2 2 4-4"/>
               </svg>
             </div>
-            <h3 class="sk-value__title">Reliable</h3>
-            <p class="sk-value__text">Secure, stable and trustworthy solutions built to last.</p>
+            <h3 class="sk-value__title">Të Besueshëm</h3>
+            <p class="sk-value__text">Zgjidhje të sigurta dhe të besueshme që zgjasin në kohë.</p>
           </article>
 
           <article class="sk-value">
@@ -861,8 +1410,8 @@
                 <path d="M5 19c.5-2 2-3.5 4-4"/>
               </svg>
             </div>
-            <h3 class="sk-value__title">Performance</h3>
-            <p class="sk-value__text">Lightning-fast websites optimized for every device.</p>
+            <h3 class="sk-value__title">Performancë</h3>
+            <p class="sk-value__text">Website të shpejta dhe të optimizuara për çdo pajisje.</p>
           </article>
 
           <article class="sk-value">
@@ -873,8 +1422,8 @@
                 <polyline points="8 6 2 12 8 18"/>
               </svg>
             </div>
-            <h3 class="sk-value__title">Innovation</h3>
-            <p class="sk-value__text">Modern technologies and creative solutions for every brand.</p>
+            <h3 class="sk-value__title">Inovacion</h3>
+            <p class="sk-value__text">Teknologji moderne dhe zgjidhje kreative për çdo brend.</p>
           </article>
 
           <article class="sk-value">
@@ -884,8 +1433,8 @@
                 <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/>
               </svg>
             </div>
-            <h3 class="sk-value__title">Excellence</h3>
-            <p class="sk-value__text">Maximum quality and attention to detail in every project.</p>
+            <h3 class="sk-value__title">Përsosmëri</h3>
+            <p class="sk-value__text">Cilësi maksimale dhe vëmendje në detaje në çdo projekt.</p>
           </article>
         </div>
 
@@ -893,19 +1442,178 @@
         <div class="sk-stats">
           <div class="sk-stat">
             <div class="sk-stat__num">50<span>+</span></div>
-            <div class="sk-stat__label">Projects Delivered</div>
+            <div class="sk-stat__label">Projekte të Realizuara</div>
           </div>
           <div class="sk-stat">
             <div class="sk-stat__num">100<span>%</span></div>
-            <div class="sk-stat__label">Client Satisfaction</div>
+            <div class="sk-stat__label">Kënaqësi e Klientit</div>
           </div>
           <div class="sk-stat">
             <div class="sk-stat__num">24<span>/7</span></div>
-            <div class="sk-stat__label">Support &amp; Care</div>
+            <div class="sk-stat__label">Mbështetje &amp; Kujdes</div>
           </div>
           <div class="sk-stat">
             <div class="sk-stat__num">5<span>★</span></div>
-            <div class="sk-stat__label">Average Rating</div>
+            <div class="sk-stat__label">Vlerësim Mesatar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="sk-projects" id="projects">
+    <div class="sk-projects__inner">
+      <div class="sk-projects__label">Projektet — 02 / Puna</div>
+
+      <div>
+        <div class="sk-projects__head">
+          <h2 class="sk-projects__title">
+            Punime<br/>
+            <em>të zgjedhura.</em>
+          </h2>
+          <p class="sk-projects__sub">
+            Një vështrim në projektet e fundit — website, brende dhe
+            eksperienca digjitale të krijuara me qëllim.
+          </p>
+        </div>
+
+        <div class="sk-projlist" id="sk-projlist">
+          <!-- Floating preview (cursor-follow on desktop) -->
+          <div class="sk-projlist__preview" id="sk-preview" aria-hidden="true">
+            <div class="sk-projlist__preview-item is-active">
+              <img src="images/MEZEMERCATERING.png" alt="Mezemer Catering preview" />
+            </div>
+            <div class="sk-projlist__preview-item">
+              <img src="images/barnatorediellza.jpg" alt="Bar Natore Diellza preview" />
+            </div>
+            <div class="sk-projlist__preview-item">
+              <img src="images/hgmaistersc.png" alt="Hausgartenmeister preview" />
+            </div>
+          </div>
+
+          <a href="https://mezemercatering.com" target="_blank" rel="noopener" class="sk-proj" data-index="0">
+            <div class="sk-proj__thumb"><img src="images/MEZEMERCATERING.png" alt="" /></div>
+            <div class="sk-proj__num">01</div>
+            <div class="sk-proj__year">2025</div>
+            <div class="sk-proj__name">Mezemer Catering</div>
+            <div class="sk-proj__cat">Katering</div>
+            <div class="sk-proj__arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"/>
+                <polyline points="7 7 17 7 17 17"/>
+              </svg>
+            </div>
+          </a>
+
+          <a href="https://barnatorediellza.com" target="_blank" rel="noopener" class="sk-proj" data-index="1">
+            <div class="sk-proj__thumb"><img src="images/barnatorediellza.jpg" alt="" /></div>
+            <div class="sk-proj__num">02</div>
+            <div class="sk-proj__year">2025</div>
+            <div class="sk-proj__name">Barnatore Diellza</div>
+            <div class="sk-proj__cat">BARNATORE</div>
+            <div class="sk-proj__arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"/>
+                <polyline points="7 7 17 7 17 17"/>
+              </svg>
+            </div>
+          </a>
+
+          <a href="https://hausgartenmeister.com" target="_blank" rel="noopener" class="sk-proj" data-index="2">
+            <div class="sk-proj__thumb"><img src="images/hgmaistersc.png" alt="" /></div>
+            <div class="sk-proj__num">03</div>
+            <div class="sk-proj__year">2025</div>
+            <div class="sk-proj__name">Hausgartenmeister</div>
+            <div class="sk-proj__cat">Kopshtari</div>
+            <div class="sk-proj__arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"/>
+                <polyline points="7 7 17 7 17 17"/>
+              </svg>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="sk-contact" id="contact">
+    <div class="sk-contact__glow" aria-hidden="true"></div>
+
+    <div class="sk-contact__inner">
+      <div class="sk-contact__label">Kontakt — 03 / Komunikim</div>
+
+      <div>
+        <div class="sk-contact__head">
+          <span class="sk-contact__eyebrow">Le të flasim</span>
+          <h2 class="sk-contact__title">
+            Keni një projekt<br/>
+            në mendje? <em>Le ta ndërtojmë.</em>
+          </h2>
+        </div>
+
+        <div class="sk-contact__grid">
+          <a href="mailto:serverkodeweb@gmail.com" class="sk-contact__card">
+            <div class="sk-contact__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="5" width="18" height="14" rx="2"/>
+                <path d="m3 7 9 6 9-6"/>
+              </svg>
+            </div>
+            <span class="sk-contact__caption">Email</span>
+            <span class="sk-contact__value">serverkodeweb@gmail.com</span>
+            <span class="sk-contact__hint">Kliko për të dërguar mesazh</span>
+          </a>
+
+          <a href="tel:+38349322093" class="sk-contact__card">
+            <div class="sk-contact__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <span class="sk-contact__caption">Telefon</span>
+            <span class="sk-contact__value">+383 49 322 093</span>
+            <span class="sk-contact__hint">Kliko për të telefonuar</span>
+          </a>
+
+          <a href="https://www.google.com/maps/search/?api=1&query=Gjakova+Kosovo" target="_blank" rel="noopener" class="sk-contact__card">
+            <div class="sk-contact__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <span class="sk-contact__caption">Lokacioni</span>
+            <span class="sk-contact__value">Gjakova, Kosova</span>
+            <span class="sk-contact__hint">Shiko në hartë</span>
+          </a>
+        </div>
+
+        <div class="sk-contact__bottom">
+          <div class="sk-contact__brand">
+            © 2025 <strong>ServerKode</strong> · Dizajn · Performancë · Siguri
+          </div>
+          <div class="sk-contact__socials">
+            <a href="#" class="sk-contact__social" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+              </svg>
+            </a>
+            <a href="#" class="sk-contact__social" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.7c0-.87.27-1.46 1.5-1.46H17V4.6c-.31-.04-1.27-.13-2.39-.13-2.36 0-3.97 1.44-3.97 4.07v2.27H8v3h2.64V21h2.86z"/>
+              </svg>
+            </a>
+            <a href="#" class="sk-contact__social" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.78-1.67-2.08-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.5 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35zM12 2C6.48 2 2 6.48 2 12c0 1.97.57 3.81 1.55 5.36L2 22l4.78-1.52A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
+              </svg>
+            </a>
           </div>
         </div>
       </div>
@@ -939,6 +1647,40 @@
       // Close on Escape
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') setOpen(false);
+      });
+    })();
+
+    /* Projects: floating preview that follows the cursor */
+    (function () {
+      const list    = document.getElementById('sk-projlist');
+      const preview = document.getElementById('sk-preview');
+      if (!list || !preview) return;
+
+      const items   = preview.querySelectorAll('.sk-projlist__preview-item');
+      const rows    = list.querySelectorAll('.sk-proj');
+      const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (!isFinePointer) return;
+
+      function setActive(idx) {
+        items.forEach((el, i) => el.classList.toggle('is-active', i === idx));
+      }
+
+      rows.forEach(function (row) {
+        row.addEventListener('mouseenter', function () {
+          setActive(parseInt(row.dataset.index, 10) || 0);
+          preview.classList.add('is-visible');
+        });
+        row.addEventListener('mouseleave', function () {
+          preview.classList.remove('is-visible');
+        });
+      });
+
+      list.addEventListener('mousemove', function (e) {
+        const rect = list.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        preview.style.left = x + 'px';
+        preview.style.top  = y + 'px';
       });
     })();
   </script>
