@@ -334,23 +334,16 @@
     body.sk-locked { overflow: hidden; }
 
     @media (max-width: 767px) {
-      .sk-header__inner { padding: 12px 18px; gap: 16px; }
-      .sk-nav, .sk-cta { display: none; }
-      .sk-burger { display: inline-flex; }
-      .sk-brand { gap: 10px; }
-      .sk-brand__mark { width: 52px; height: 52px; }
-      .sk-brand__name { font-size: 15px; letter-spacing: 2.5px; }
-      .sk-brand__tagline { font-size: 8px; letter-spacing: 2px; margin-top: 5px; }
-    }
-
-    @media (max-width: 480px) {
+      /* Header */
       .sk-header__inner { padding: 10px 14px; gap: 10px; }
+      .sk-nav, .sk-cta { display: none; }
+      .sk-burger { display: inline-flex; width: 36px; height: 36px; }
       .sk-brand { gap: 8px; }
       .sk-brand__mark { width: 46px; height: 46px; }
       .sk-brand__name { font-size: 14px; letter-spacing: 2px; }
       .sk-brand__tagline { display: none; }
-      .sk-burger { width: 36px; height: 36px; }
     }
+
 
     /* ---------- HERO ---------- */
     .sk-hero {
@@ -532,24 +525,20 @@
     }
 
     @media (max-width: 767px) {
+      /* Hero */
       .sk-hero__inner {
         grid-template-columns: 1fr;
-        padding: 70px 24px 80px;
-        gap: 48px;
+        padding: 40px 20px 64px;
+        gap: 0;
         text-align: center;
       }
+      .sk-hero__content { order: 0; margin-top: 40px; }
+      .sk-hero__visual  { order: 1; margin-top: -20px; }
       .sk-hero__lead { margin-left: auto; margin-right: auto; }
       .sk-hero__actions { justify-content: center; }
-      .sk-hero__visual { order: -1; }
       .sk-codebox { width: 240px; max-width: 240px; }
     }
 
-    /* Phone: show text BEFORE the image */
-    @media (max-width: 560px) {
-      .sk-hero__inner { gap: 0; padding-bottom: 40px; }
-      .sk-hero__content { order: 0; margin-top: 40px; }
-      .sk-hero__visual  { order: 1; margin-top: -20px; }
-    }
 
     /* ---------- ABOUT ---------- */
     .sk-about {
@@ -737,6 +726,7 @@
     }
 
     @media (max-width: 767px) {
+      /* About */
       .sk-about { padding: 80px 0 100px; }
       .sk-about__watermark {
         top: 38%;
@@ -749,14 +739,10 @@
       .sk-about__label::after { display: none; }
       .sk-about__head { grid-template-columns: 1fr; gap: 28px; margin-bottom: 56px; }
       .sk-values { grid-template-columns: repeat(2, 1fr); }
+      .sk-value { padding: 32px 24px 36px; }
       .sk-stats { grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 56px; }
     }
 
-    @media (max-width: 480px) {
-      .sk-values { grid-template-columns: 1fr; }
-      .sk-stats { grid-template-columns: repeat(2, 1fr); }
-      .sk-value { padding: 32px 24px 36px; }
-    }
   </style>
 </head>
 <body>
