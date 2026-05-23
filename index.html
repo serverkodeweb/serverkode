@@ -388,6 +388,9 @@
       gap: 60px;
     }
 
+    .sk-hero__pulse,
+    .sk-hero__foot { display: none; }
+
     .sk-hero__eyebrow {
       display: inline-block;
       font-size: 11px;
@@ -430,21 +433,30 @@
     }
 
     .sk-btn {
+      position: relative;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 14px 28px;
+      gap: 14px;
+      padding: 16px 28px;
       font-family: inherit;
       font-size: 12px;
       font-weight: 600;
-      letter-spacing: 2px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
-      border-radius: 2px;
+      border-radius: 0;
       text-decoration: none;
       cursor: pointer;
-      transition: all .2s ease;
+      transition: background .25s ease, color .25s ease, border-color .25s ease, transform .2s ease;
       border: 1px solid var(--premium-white);
+      overflow: hidden;
     }
+    .sk-btn__arrow {
+      display: inline-block;
+      transition: transform .3s cubic-bezier(.4,0,.2,1);
+    }
+    .sk-btn:hover .sk-btn__arrow { transform: translateX(4px); }
+    .sk-btn:active { transform: translateY(1px); }
+
     .sk-btn--primary {
       background: var(--premium-white);
       color: var(--dark-midnight);
@@ -533,18 +545,99 @@
     }
 
     @media (max-width: 767px) {
-      /* Hero */
+      /* Hero — editorial mobile layout */
+      .sk-hero { overflow: hidden; }
       .sk-hero__inner {
+        position: relative;
         grid-template-columns: 1fr;
-        padding: 40px 20px 64px;
+        padding: 56px 22px 72px;
         gap: 0;
-        text-align: center;
+        text-align: left;
       }
-      .sk-hero__content { order: 0; margin-top: 40px; }
-      .sk-hero__visual  { order: 1; margin-top: -20px; }
-      .sk-hero__lead { margin-left: auto; margin-right: auto; }
-      .sk-hero__actions { justify-content: center; }
-      .sk-codebox { width: 240px; max-width: 240px; }
+
+      /* Giant </> watermark behind the title */
+      .sk-hero__inner::before {
+        content: "</>";
+        position: absolute;
+        top: 28px;
+        right: -20px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 38vw;
+        font-weight: 700;
+        color: rgba(74, 124, 255, 0.07);
+        line-height: 1;
+        letter-spacing: -4px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .sk-hero__content {
+        position: relative;
+        z-index: 1;
+        order: 0;
+        margin-top: 16px;
+      }
+
+      .sk-hero__title {
+        font-size: clamp(38px, 11vw, 56px);
+        line-height: 0.95;
+        letter-spacing: 1px;
+      }
+      .sk-hero__title span:first-child { color: var(--premium-white); }
+      .sk-hero__title span:last-child  {
+        color: var(--steel-gray);
+        font-weight: 500;
+      }
+
+      .sk-hero__lead {
+        margin: 22px 0 0;
+        max-width: 100%;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .sk-hero__actions {
+        margin-top: 32px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      .sk-hero__actions .sk-btn {
+        width: 100%;
+        justify-content: space-between;
+        padding: 16px 20px;
+        font-size: 13px;
+      }
+      .sk-hero__actions .sk-btn::after {
+        content: "→";
+        font-size: 16px;
+      }
+
+      /* Hide the round codebox on phone — watermark replaces it */
+      .sk-hero__visual { display: none; }
+
+      /* Bottom hairline + label */
+      .sk-hero__inner > .sk-hero__foot {
+        position: relative;
+        z-index: 1;
+        margin-top: 48px;
+        padding-top: 18px;
+        border-top: 1px solid rgba(167, 175, 189, 0.15);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--steel-gray);
+      }
+    }
+
+    @keyframes sk-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6); }
+      70%  { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
     }
 
 
@@ -1334,7 +1427,7 @@
       <a href="#home"     class="sk-mobile__link">Ballina</a>
       <a href="#about"    class="sk-mobile__link">Rreth Nesh</a>
       <a href="#projects" class="sk-mobile__link">Projektet</a>
-      <a href="#contact"  class="sk-mobile__link">Kontakt</a>
+      <a href="#contact"  class="sk-mobile__link">Kontakti</a>
     </nav>
     <div class="sk-mobile__footer">
       <a href="#contact" class="sk-mobile__cta">Kërko Ofertë</a>
@@ -1345,6 +1438,8 @@
   <!-- HERO -->
   <section class="sk-hero" id="home">
     <div class="sk-hero__inner">
+      <span class="sk-hero__pulse" aria-hidden="true"></span>
+
       <div class="sk-hero__content">
         <h1 class="sk-hero__title">
           <span>Website Moderne</span>
@@ -1363,6 +1458,11 @@
         <div class="sk-codebox">
           <span class="sk-codebox__symbol">&lt;/&gt;</span>
         </div>
+      </div>
+
+      <div class="sk-hero__foot" aria-hidden="true">
+        <span>01 / Hero</span>
+        <span>Scroll ↓</span>
       </div>
     </div>
   </section>
@@ -1496,7 +1596,7 @@
             <div class="sk-proj__thumb"><img src="images/MEZEMERCATERING.png" alt="" /></div>
             <div class="sk-proj__num">01</div>
             <div class="sk-proj__year">2025</div>
-            <div class="sk-proj__name">Mezemer Catering</div>
+            <div class="sk-proj__name">MezemerCatering</div>
             <div class="sk-proj__cat">Katering</div>
             <div class="sk-proj__arrow">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1510,7 +1610,7 @@
             <div class="sk-proj__thumb"><img src="images/barnatorediellza.jpg" alt="" /></div>
             <div class="sk-proj__num">02</div>
             <div class="sk-proj__year">2025</div>
-            <div class="sk-proj__name">Barnatore Diellza</div>
+            <div class="sk-proj__name">BarnatoreDiellza</div>
             <div class="sk-proj__cat">BARNATORE</div>
             <div class="sk-proj__arrow">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1626,6 +1726,15 @@
       const menu   = document.getElementById('sk-mobile');
       if (!burger || !menu) return;
 
+      let autoCloseTimer = null;
+      function clearAutoClose() {
+        if (autoCloseTimer) { clearTimeout(autoCloseTimer); autoCloseTimer = null; }
+      }
+      function scheduleAutoClose() {
+        clearAutoClose();
+        autoCloseTimer = setTimeout(function () { setOpen(false); }, 5000);
+      }
+
       function setOpen(open) {
         burger.classList.toggle('is-open', open);
         menu.classList.toggle('is-open', open);
@@ -1633,10 +1742,19 @@
         burger.setAttribute('aria-expanded', String(open));
         burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
         menu.setAttribute('aria-hidden', String(!open));
+        if (open) scheduleAutoClose();
+        else      clearAutoClose();
       }
 
       burger.addEventListener('click', function () {
         setOpen(!burger.classList.contains('is-open'));
+      });
+
+      // Reset the 5s timer whenever the user interacts with the menu
+      ['mousemove', 'touchstart', 'scroll'].forEach(function (evt) {
+        menu.addEventListener(evt, function () {
+          if (menu.classList.contains('is-open')) scheduleAutoClose();
+        }, { passive: true });
       });
 
       // Close menu when any link is tapped
