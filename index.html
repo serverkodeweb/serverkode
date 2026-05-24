@@ -34,7 +34,10 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(167, 175, 189, 0.12);
+      transition: transform .35s cubic-bezier(.4,0,.2,1);
+      will-change: transform;
     }
+    .sk-header.is-hidden { transform: translateY(-100%); }
 
     .sk-header__inner {
       max-width: 1280px;
@@ -167,51 +170,30 @@
     .sk-burger:hover { background: rgba(241, 236, 226, 0.08); }
     .sk-burger:active { transform: scale(0.92); }
 
-    .sk-burger__lines {
+    .sk-burger__icon {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 24px;
-      height: 16px;
+      width: 22px;
+      height: 22px;
       transform: translate(-50%, -50%);
-      background: transparent;
+      color: var(--premium-white);
+      pointer-events: none;
     }
-
-    /* Two angle brackets:  <  and  >  */
-    .sk-burger__lines::before,
-    .sk-burger__lines::after {
-      content: "";
+    .sk-burger__icon svg {
       position: absolute;
-      top: 50%;
-      width: 9px;
-      height: 9px;
-      border: 2px solid var(--premium-white);
-      border-right: none;
-      border-top: none;
-      transition: transform .35s cubic-bezier(.4,.0,.2,1),
-                  left .35s cubic-bezier(.4,.0,.2,1),
-                  right .35s cubic-bezier(.4,.0,.2,1);
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transition: opacity .3s ease, transform .4s cubic-bezier(.4,0,.2,1);
     }
-    /* left bracket "<" */
-    .sk-burger__lines::before {
-      left: 1px;
-      transform: translateY(-50%) rotate(45deg);
-    }
-    /* right bracket ">" */
-    .sk-burger__lines::after {
-      right: 1px;
-      transform: translateY(-50%) rotate(-135deg);
-    }
+    /* Default: show </> code-tag mark */
+    .sk-burger__code  { opacity: 1; transform: rotate(0deg)  scale(1);  }
+    .sk-burger__close { opacity: 0; transform: rotate(-90deg) scale(.7); }
 
-    /* Open -> X (brackets slide to center and rotate) */
-    .sk-burger.is-open .sk-burger__lines::before {
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(-45deg);
-    }
-    .sk-burger.is-open .sk-burger__lines::after {
-      right: 50%;
-      transform: translate(50%, -50%) rotate(45deg);
-    }
+    /* Open: morph to close (X) */
+    .sk-burger.is-open .sk-burger__code  { opacity: 0; transform: rotate(90deg) scale(.7); }
+    .sk-burger.is-open .sk-burger__close { opacity: 1; transform: rotate(0deg)  scale(1);  }
 
     /* ---------- MOBILE MENU ---------- */
     .sk-mobile {
@@ -229,8 +211,56 @@
       visibility: hidden;
       transform: translateY(-8px);
       transition: opacity .3s ease, transform .35s ease, visibility .3s ease;
+      overflow-x: hidden;
       overflow-y: auto;
     }
+
+    .sk-mobile__watermark {
+      position: absolute;
+      bottom: 230px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: clamp(36px, 10vw, 80px);
+      font-weight: 700;
+      letter-spacing: -3px;
+      line-height: 1;
+      color: rgba(241, 236, 226, 0.05);
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+      z-index: 0;
+    }
+
+    .sk-mobile__watermark span {
+      color: rgba(241, 236, 226, 0.05);
+      animation-duration: 5.5s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+    }
+    .sk-mobile__watermark span:nth-child(1)  { animation-name: sk-wm-1; }
+    .sk-mobile__watermark span:nth-child(2)  { animation-name: sk-wm-2; }
+    .sk-mobile__watermark span:nth-child(3)  { animation-name: sk-wm-3; }
+    .sk-mobile__watermark span:nth-child(4)  { animation-name: sk-wm-4; }
+    .sk-mobile__watermark span:nth-child(5)  { animation-name: sk-wm-5; }
+    .sk-mobile__watermark span:nth-child(6)  { animation-name: sk-wm-6; }
+    .sk-mobile__watermark span:nth-child(7)  { animation-name: sk-wm-7; }
+    .sk-mobile__watermark span:nth-child(8)  { animation-name: sk-wm-8; }
+    .sk-mobile__watermark span:nth-child(9)  { animation-name: sk-wm-9; }
+    .sk-mobile__watermark span:nth-child(10) { animation-name: sk-wm-10; }
+
+    @keyframes sk-wm-1  { 0%, 5%  { color: rgba(241,236,226,0.05); } 8%,  95% { color: #fff; } 100% { color: rgba(241,236,226,0.05); } }
+    @keyframes sk-wm-2  { 0%, 13% { color: rgba(241,236,226,0.05); } 16%, 95% { color: #fff; } 100% { color: rgba(241,236,226,0.05); } }
+    @keyframes sk-wm-3  { 0%, 21% { color: rgba(241,236,226,0.05); } 24%, 95% { color: #fff; } 100% { color: rgba(241,236,226,0.05); } }
+    @keyframes sk-wm-4  { 0%, 29% { color: rgba(241,236,226,0.05); } 32%, 95% { color: #fff; } 100% { color: rgba(241,236,226,0.05); } }
+    @keyframes sk-wm-5  { 0%, 37% { color: rgba(241,236,226,0.05); } 40%, 95% { color: #fff; } 100% { color: rgba(241,236,226,0.05); } }
+    @keyframes sk-wm-6  { 0%, 45% { color: rgba(241,236,226,0.05); } 48%, 95% { color: #fff; } 100% { color: rgba(241,236,226,0.05); } }
+    @keyframes sk-wm-7  { 0%, 53% { color: rgba(241,236,226,0.05); } 56%, 95% { color: #fff; } 100% { color: rgba(241,236,226,0.05); } }
+    @keyframes sk-wm-8  { 0%, 61% { color: rgba(241,236,226,0.05); } 64%, 95% { color: #fff; } 100% { color: rgba(241,236,226,0.05); } }
+    @keyframes sk-wm-9  { 0%, 69% { color: rgba(241,236,226,0.05); } 72%, 95% { color: #fff; } 100% { color: rgba(241,236,226,0.05); } }
+    @keyframes sk-wm-10 { 0%, 77% { color: rgba(241,236,226,0.05); } 80%, 95% { color: #fff; } 100% { color: rgba(241,236,226,0.05); } }
+
+    .sk-mobile__nav,
+    .sk-mobile__footer { position: relative; z-index: 1; }
 
     .sk-mobile.is-open {
       opacity: 1;
@@ -290,6 +320,62 @@
       color: var(--premium-white);
     }
 
+    .sk-mobile__interlude {
+      margin: 18px 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sk-mobile__line {
+      flex: 1;
+      height: 1px;
+      background: rgba(167, 175, 189, 0.18);
+    }
+    .sk-mobile__badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(167, 175, 189, 0.25);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--steel-gray);
+      background: rgba(10, 19, 48, 0.5);
+      position: relative;
+      animation: sk-badge-pulse 2.6s ease-in-out infinite;
+    }
+    .sk-mobile__badge::before {
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid rgba(74, 124, 255, 0.12);
+      animation: sk-badge-ring 2.6s ease-in-out infinite;
+    }
+    .sk-mobile__badge svg {
+      width: 14px;
+      height: 14px;
+      display: block;
+    }
+    .sk-mobile__caption {
+      text-align: center;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--steel-gray);
+      margin-bottom: 8px;
+    }
+
+    @keyframes sk-badge-pulse {
+      0%, 100% { color: var(--steel-gray); border-color: rgba(167, 175, 189, 0.25); }
+      50%      { color: var(--premium-white); border-color: rgba(241, 236, 226, 0.45); }
+    }
+    @keyframes sk-badge-ring {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50%      { opacity: 0;   transform: scale(1.4); }
+    }
+
     .sk-mobile__footer {
       margin-top: 32px;
       display: flex;
@@ -330,7 +416,7 @@
 
     @media (max-width: 767px) {
       /* Header */
-      .sk-header__inner { padding: 10px 14px; gap: 10px; }
+      .sk-header__inner { padding: 16px 20px; gap: 12px; }
       .sk-nav, .sk-cta { display: none; }
       .sk-burger { display: inline-flex; width: 36px; height: 36px; }
       .sk-brand { gap: 10px; min-width: 0; }
@@ -414,7 +500,11 @@
 
     .sk-hero__title span {
       display: block;
-      color: var(--premium-white);
+    }
+    .sk-hero__title span:first-child { color: var(--premium-white); }
+    .sk-hero__title span:last-child  {
+      color: var(--steel-gray);
+      font-weight: 500;
     }
 
     .sk-hero__lead {
@@ -597,20 +687,15 @@
       }
 
       .sk-hero__actions {
-        margin-top: 32px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
+        margin-top: 28px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 12px;
       }
       .sk-hero__actions .sk-btn {
-        width: 100%;
-        justify-content: space-between;
-        padding: 16px 20px;
-        font-size: 13px;
-      }
-      .sk-hero__actions .sk-btn::after {
-        content: "→";
-        font-size: 16px;
+        padding: 14px 22px;
+        font-size: 11px;
+        letter-spacing: 2px;
       }
 
       /* Hide the round codebox on phone — watermark replaces it */
@@ -640,6 +725,178 @@
       100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
     }
 
+
+    /* ---------- SERVICES ---------- */
+    .sk-services {
+      position: relative;
+      overflow: hidden;
+      background: var(--dark-midnight);
+      padding: 130px 0 140px;
+    }
+
+    .sk-services::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 85% 15%, rgba(74, 124, 255, 0.08) 0%, transparent 45%),
+        radial-gradient(ellipse at 15% 95%, rgba(10, 19, 48, 0.5) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .sk-services__inner {
+      position: relative;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 40px;
+    }
+
+    .sk-services__label {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--steel-gray);
+      align-self: start;
+      padding-top: 8px;
+    }
+
+    .sk-services__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 40px;
+      margin-bottom: 72px;
+    }
+
+    .sk-services__title {
+      font-size: clamp(32px, 4.2vw, 52px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .sk-services__title em {
+      font-style: normal;
+      color: var(--steel-gray);
+      font-weight: 400;
+    }
+
+    .sk-services__sub {
+      font-size: 14px;
+      color: var(--steel-gray);
+      max-width: 320px;
+      line-height: 1.7;
+      text-align: right;
+    }
+
+    /* Services grid — matches Brand Values style */
+    .sk-srv-bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(167, 175, 189, 0.12);
+      border: 1px solid rgba(167, 175, 189, 0.12);
+    }
+
+    .sk-srv {
+      position: relative;
+      background: rgba(10, 19, 48, 0.75);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      padding: 40px 32px 44px;
+      transition: background .35s ease;
+      overflow: hidden;
+    }
+
+    .sk-srv::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--premium-white);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s ease;
+    }
+
+    .sk-srv:hover { background: #0d1a3d; }
+    .sk-srv:hover::before { transform: scaleX(1); }
+    .sk-srv:hover .sk-srv__icon {
+      transform: translateY(-4px);
+      color: var(--premium-white);
+    }
+
+    .sk-srv__num {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--steel-gray);
+      margin-bottom: 28px;
+    }
+
+    .sk-srv__icon {
+      width: 44px;
+      height: 44px;
+      color: var(--steel-gray);
+      margin-bottom: 24px;
+      transition: transform .35s ease, color .35s ease;
+    }
+    .sk-srv__icon svg { width: 100%; height: 100%; display: block; }
+
+    .sk-srv__title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--premium-white);
+      margin-bottom: 12px;
+    }
+
+    .sk-srv__text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--steel-gray);
+    }
+
+    @media (max-width: 1024px) and (min-width: 768px) {
+      .sk-services { padding: 100px 0 110px; }
+      .sk-services__inner { grid-template-columns: 60px 1fr; padding: 0 24px; gap: 28px; }
+      .sk-services__head { gap: 28px; margin-bottom: 56px; }
+      .sk-services__sub { max-width: 260px; font-size: 13px; }
+      .sk-srv-bento { grid-template-columns: repeat(2, 1fr); }
+      .sk-srv { padding: 32px 22px 36px; }
+      .sk-srv__title { font-size: 14px; letter-spacing: 2px; }
+    }
+
+    @media (max-width: 767px) {
+      .sk-services { padding: 80px 0 100px; }
+      .sk-services__inner { grid-template-columns: 1fr; gap: 24px; padding: 0 24px; }
+      .sk-services__label { writing-mode: horizontal-tb; transform: none; padding: 0; }
+      .sk-services__head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 48px;
+      }
+      .sk-services__sub { text-align: left; }
+      .sk-srv-bento { grid-template-columns: repeat(2, 1fr); }
+      .sk-srv { padding: 28px 18px 32px; }
+      .sk-srv__icon { width: 36px; height: 36px; margin-bottom: 18px; }
+      .sk-srv__num { margin-bottom: 20px; }
+      .sk-srv__title {
+        font-size: 13px;
+        letter-spacing: 1.5px;
+        word-break: break-word;
+      }
+      .sk-srv__text { font-size: 13px; line-height: 1.6; }
+    }
 
     /* ---------- ABOUT ---------- */
     .sk-about {
@@ -1225,7 +1482,7 @@
       color: var(--steel-gray);
       padding: 8px 14px;
       border: 1px solid rgba(167, 175, 189, 0.25);
-      border-radius: 999px;
+      border-radius: 0;
       margin-bottom: 28px;
     }
 
@@ -1385,6 +1642,62 @@
       .sk-contact__value { font-size: 17px; }
       .sk-contact__bottom { margin-top: 56px; padding: 24px 0 32px; }
     }
+
+    /* ---------- MOBILE-ONLY SCROLL REVEAL ---------- */
+    @media (max-width: 767px) {
+      .sk-reveal {
+        opacity: 0;
+        transform: translate3d(0, 28px, 0);
+        filter: blur(6px);
+        transition:
+          opacity .9s cubic-bezier(.22,.61,.36,1),
+          transform .9s cubic-bezier(.22,.61,.36,1),
+          filter .9s cubic-bezier(.22,.61,.36,1);
+        will-change: opacity, transform, filter;
+      }
+      .sk-reveal.is-in {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        filter: blur(0);
+      }
+      .sk-reveal--left  { transform: translate3d(-24px, 0, 0); }
+      .sk-reveal--right { transform: translate3d( 24px, 0, 0); }
+      .sk-reveal--left.is-in,
+      .sk-reveal--right.is-in { transform: translate3d(0, 0, 0); }
+
+      .sk-reveal--d1 { transition-delay: .08s; }
+      .sk-reveal--d2 { transition-delay: .16s; }
+      .sk-reveal--d3 { transition-delay: .24s; }
+      .sk-reveal--d4 { transition-delay: .32s; }
+      .sk-reveal--d5 { transition-delay: .40s; }
+      .sk-reveal--d6 { transition-delay: .48s; }
+
+      /* Hero entrance on load */
+      .sk-hero__title > span,
+      .sk-hero__lead,
+      .sk-hero__actions {
+        opacity: 0;
+        transform: translate3d(0, 24px, 0);
+        animation: sk-hero-in .9s cubic-bezier(.22,.61,.36,1) forwards;
+      }
+      .sk-hero__title > span:nth-child(1) { animation-delay: .15s; }
+      .sk-hero__title > span:nth-child(2) { animation-delay: .30s; }
+      .sk-hero__lead                       { animation-delay: .55s; }
+      .sk-hero__actions                    { animation-delay: .75s; }
+      @keyframes sk-hero-in {
+        to { opacity: 1; transform: translate3d(0, 0, 0); }
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sk-reveal, .sk-reveal.is-in,
+      .sk-hero__title > span, .sk-hero__lead, .sk-hero__actions {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        animation: none !important;
+        transition: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1406,31 +1719,44 @@
       <!-- Navigation -->
       <nav class="sk-nav" aria-label="Primary">
         <a href="#home"     class="sk-nav__link is-active">Ballina</a>
-        <a href="#about"    class="sk-nav__link">Rreth Nesh</a>
+        <a href="#services" class="sk-nav__link">Shërbimet</a>
         <a href="#projects" class="sk-nav__link">Projektet</a>
-        <a href="#contact"  class="sk-nav__link">Kontakt</a>
+        <a href="#about"    class="sk-nav__link">Rreth Nesh</a>
       </nav>
 
       <!-- CTA -->
-      <a href="#contact" class="sk-cta">Kërko Ofertë</a>
+      <a href="#contact" class="sk-cta">Kontakti</a>
 
       <!-- Mobile -->
       <button class="sk-burger" aria-label="Open menu" aria-expanded="false">
-        <span class="sk-burger__lines"></span>
+        <span class="sk-burger__icon" aria-hidden="true">
+          <svg class="sk-burger__code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="8 7 3 12 8 17"/>
+            <polyline points="16 7 21 12 16 17"/>
+            <line x1="14" y1="5" x2="10" y2="19"/>
+          </svg>
+          <svg class="sk-burger__close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="6" y1="6" x2="18" y2="18"/>
+            <line x1="18" y1="6" x2="6" y2="18"/>
+          </svg>
+        </span>
       </button>
     </div>
   </header>
 
   <!-- Mobile slide-in menu -->
   <div class="sk-mobile" id="sk-mobile" aria-hidden="true">
+    <div class="sk-mobile__watermark" aria-hidden="true"><span>S</span><span>E</span><span>R</span><span>V</span><span>E</span><span>R</span><span>K</span><span>O</span><span>D</span><span>E</span></div>
+
     <nav class="sk-mobile__nav" aria-label="Mobile">
       <a href="#home"     class="sk-mobile__link">Ballina</a>
-      <a href="#about"    class="sk-mobile__link">Rreth Nesh</a>
+      <a href="#services" class="sk-mobile__link">Shërbimet</a>
       <a href="#projects" class="sk-mobile__link">Projektet</a>
-      <a href="#contact"  class="sk-mobile__link">Kontakti</a>
+      <a href="#about"    class="sk-mobile__link">Rreth Nesh</a>
     </nav>
+
     <div class="sk-mobile__footer">
-      <a href="#contact" class="sk-mobile__cta">Kërko Ofertë</a>
+      <a href="#contact" class="sk-mobile__cta">Kontakti</a>
       <div class="sk-mobile__meta">ServerKode · Dizajn · Performancë · Siguri</div>
     </div>
   </div>
@@ -1467,12 +1793,187 @@
     </div>
   </section>
 
+  <!-- SERVICES -->
+  <section class="sk-services" id="services">
+    <div class="sk-services__inner">
+      <div class="sk-services__label">Shërbimet — 01</div>
+
+      <div>
+        <div class="sk-services__head">
+          <h2 class="sk-services__title">
+            Çfarë<br/>
+            <em>ofrojmë.</em>
+          </h2>
+          <p class="sk-services__sub">
+            Zgjidhje digjitale të plota — nga dizajni te zhvillimi, performanca dhe mirëmbajtja.
+          </p>
+        </div>
+
+        <div class="sk-srv-bento">
+
+          <article class="sk-srv">
+            <div class="sk-srv__num">01</div>
+            <div class="sk-srv__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="14" rx="2"/>
+                <path d="M3 9h18"/>
+                <path d="M9 21h6"/>
+                <path d="M12 17v4"/>
+              </svg>
+            </div>
+            <h3 class="sk-srv__title">Dizajn Web</h3>
+            <p class="sk-srv__text">Dizajn modern, i pastër dhe funksional që përshtatet me brendin tuaj.</p>
+          </article>
+
+          <article class="sk-srv">
+            <div class="sk-srv__num">02</div>
+            <div class="sk-srv__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"/>
+                <polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <h3 class="sk-srv__title">Zhvillim Web</h3>
+            <p class="sk-srv__text">Website të shpejta, të sigurta dhe të optimizuara me teknologji moderne.</p>
+          </article>
+
+          <article class="sk-srv">
+            <div class="sk-srv__num">03</div>
+            <div class="sk-srv__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"/>
+                <circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/>
+              </svg>
+            </div>
+            <h3 class="sk-srv__title">E-Commerce</h3>
+            <p class="sk-srv__text">Dyqane online me menaxhim produktesh dhe pagesa të sigurta.</p>
+          </article>
+
+          <article class="sk-srv">
+            <div class="sk-srv__num">04</div>
+            <div class="sk-srv__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                <path d="M2 12h20"/>
+              </svg>
+            </div>
+            <h3 class="sk-srv__title">SEO & Performancë</h3>
+            <p class="sk-srv__text">Optimizim për motorët e kërkimit dhe performancë maksimale.</p>
+          </article>
+
+          <article class="sk-srv">
+            <div class="sk-srv__num">05</div>
+            <div class="sk-srv__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/>
+              </svg>
+            </div>
+            <h3 class="sk-srv__title">Identitet Brendi</h3>
+            <p class="sk-srv__text">Logo, paleta ngjyrash dhe udhëzues vizual për një brend koherent.</p>
+          </article>
+
+          <article class="sk-srv">
+            <div class="sk-srv__num">06</div>
+            <div class="sk-srv__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2 4 5v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V5l-8-3z"/>
+              </svg>
+            </div>
+            <h3 class="sk-srv__title">Hosting & Mirëmbajtje</h3>
+            <p class="sk-srv__text">Hosting të besueshëm dhe mbështetje teknike e vazhdueshme.</p>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="sk-projects" id="projects">
+    <div class="sk-projects__inner">
+      <div class="sk-projects__label">Projektet — 02</div>
+
+      <div>
+        <div class="sk-projects__head">
+          <h2 class="sk-projects__title">
+            Punime<br/>
+            <em>të zgjedhura.</em>
+          </h2>
+          <p class="sk-projects__sub">
+            Një vështrim në projektet e fundit — website, brende dhe
+            eksperienca digjitale të krijuara me qëllim.
+          </p>
+        </div>
+
+        <div class="sk-projlist" id="sk-projlist">
+          <!-- Floating preview (cursor-follow on desktop) -->
+          <div class="sk-projlist__preview" id="sk-preview" aria-hidden="true">
+            <div class="sk-projlist__preview-item is-active">
+              <img src="images/MEZEMERCATERING.png" alt="Mezemer Catering preview" />
+            </div>
+            <div class="sk-projlist__preview-item">
+              <img src="images/barnatorediellza.jpg" alt="Bar Natore Diellza preview" />
+            </div>
+            <div class="sk-projlist__preview-item">
+              <img src="images/hgmaistersc.png" alt="Hausgartenmeister preview" />
+            </div>
+          </div>
+
+          <a href="https://mezemercatering.com" target="_blank" rel="noopener" class="sk-proj" data-index="0">
+            <div class="sk-proj__thumb"><img src="images/MEZEMERCATERING.png" alt="" /></div>
+            <div class="sk-proj__num">01</div>
+            <div class="sk-proj__year">2025</div>
+            <div class="sk-proj__name">MezemerCatering</div>
+            <div class="sk-proj__cat">Katering</div>
+            <div class="sk-proj__arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"/>
+                <polyline points="7 7 17 7 17 17"/>
+              </svg>
+            </div>
+          </a>
+
+          <a href="https://barnatorediellza.com" target="_blank" rel="noopener" class="sk-proj" data-index="1">
+            <div class="sk-proj__thumb"><img src="images/barnatorediellza.jpg" alt="" /></div>
+            <div class="sk-proj__num">02</div>
+            <div class="sk-proj__year">2025</div>
+            <div class="sk-proj__name">BarnatoreDiellza</div>
+            <div class="sk-proj__cat">BARNATORE</div>
+            <div class="sk-proj__arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"/>
+                <polyline points="7 7 17 7 17 17"/>
+              </svg>
+            </div>
+          </a>
+
+          <a href="https://hausgartenmeister.com" target="_blank" rel="noopener" class="sk-proj" data-index="2">
+            <div class="sk-proj__thumb"><img src="images/hgmaistersc.png" alt="" /></div>
+            <div class="sk-proj__num">03</div>
+            <div class="sk-proj__year">2025</div>
+            <div class="sk-proj__name">Hausgartenmeister</div>
+            <div class="sk-proj__cat">Kopshtari</div>
+            <div class="sk-proj__arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"/>
+                <polyline points="7 7 17 7 17 17"/>
+              </svg>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ABOUT -->
   <section class="sk-about" id="about">
     <div class="sk-about__watermark" aria-hidden="true">SK</div>
 
     <div class="sk-about__inner">
-      <div class="sk-about__label">Rreth Nesh — 01 / Brendi</div>
+      <div class="sk-about__label">Rreth Nesh — 03</div>
 
       <div>
         <div class="sk-about__head">
@@ -1561,90 +2062,12 @@
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section class="sk-projects" id="projects">
-    <div class="sk-projects__inner">
-      <div class="sk-projects__label">Projektet — 02 / Puna</div>
-
-      <div>
-        <div class="sk-projects__head">
-          <h2 class="sk-projects__title">
-            Punime<br/>
-            <em>të zgjedhura.</em>
-          </h2>
-          <p class="sk-projects__sub">
-            Një vështrim në projektet e fundit — website, brende dhe
-            eksperienca digjitale të krijuara me qëllim.
-          </p>
-        </div>
-
-        <div class="sk-projlist" id="sk-projlist">
-          <!-- Floating preview (cursor-follow on desktop) -->
-          <div class="sk-projlist__preview" id="sk-preview" aria-hidden="true">
-            <div class="sk-projlist__preview-item is-active">
-              <img src="images/MEZEMERCATERING.png" alt="Mezemer Catering preview" />
-            </div>
-            <div class="sk-projlist__preview-item">
-              <img src="images/barnatorediellza.jpg" alt="Bar Natore Diellza preview" />
-            </div>
-            <div class="sk-projlist__preview-item">
-              <img src="images/hgmaistersc.png" alt="Hausgartenmeister preview" />
-            </div>
-          </div>
-
-          <a href="https://mezemercatering.com" target="_blank" rel="noopener" class="sk-proj" data-index="0">
-            <div class="sk-proj__thumb"><img src="images/MEZEMERCATERING.png" alt="" /></div>
-            <div class="sk-proj__num">01</div>
-            <div class="sk-proj__year">2025</div>
-            <div class="sk-proj__name">MezemerCatering</div>
-            <div class="sk-proj__cat">Katering</div>
-            <div class="sk-proj__arrow">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="7" y1="17" x2="17" y2="7"/>
-                <polyline points="7 7 17 7 17 17"/>
-              </svg>
-            </div>
-          </a>
-
-          <a href="https://barnatorediellza.com" target="_blank" rel="noopener" class="sk-proj" data-index="1">
-            <div class="sk-proj__thumb"><img src="images/barnatorediellza.jpg" alt="" /></div>
-            <div class="sk-proj__num">02</div>
-            <div class="sk-proj__year">2025</div>
-            <div class="sk-proj__name">BarnatoreDiellza</div>
-            <div class="sk-proj__cat">BARNATORE</div>
-            <div class="sk-proj__arrow">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="7" y1="17" x2="17" y2="7"/>
-                <polyline points="7 7 17 7 17 17"/>
-              </svg>
-            </div>
-          </a>
-
-          <a href="https://hausgartenmeister.com" target="_blank" rel="noopener" class="sk-proj" data-index="2">
-            <div class="sk-proj__thumb"><img src="images/hgmaistersc.png" alt="" /></div>
-            <div class="sk-proj__num">03</div>
-            <div class="sk-proj__year">2025</div>
-            <div class="sk-proj__name">Hausgartenmeister</div>
-            <div class="sk-proj__cat">Kopshtari</div>
-            <div class="sk-proj__arrow">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="7" y1="17" x2="17" y2="7"/>
-                <polyline points="7 7 17 7 17 17"/>
-              </svg>
-            </div>
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
   <!-- CONTACT -->
   <section class="sk-contact" id="contact">
     <div class="sk-contact__glow" aria-hidden="true"></div>
 
     <div class="sk-contact__inner">
-      <div class="sk-contact__label">Kontakt — 03 / Komunikim</div>
+      <div class="sk-contact__label">Kontakt — 04</div>
 
       <div>
         <div class="sk-contact__head">
@@ -1697,21 +2120,16 @@
             © 2025 <strong>ServerKode</strong> · Dizajn · Performancë · Siguri
           </div>
           <div class="sk-contact__socials">
-            <a href="#" class="sk-contact__social" aria-label="Instagram">
+            <a href="https://www.instagram.com/serverkode/" target="_blank" rel="noopener noreferrer" class="sk-contact__social" aria-label="Instagram @serverkode">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="3" width="18" height="18" rx="5"/>
                 <circle cx="12" cy="12" r="4"/>
                 <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
               </svg>
             </a>
-            <a href="#" class="sk-contact__social" aria-label="Facebook">
+            <a href="https://www.tiktok.com/@serverkode" target="_blank" rel="noopener noreferrer" class="sk-contact__social" aria-label="TikTok @serverkode">
               <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.7c0-.87.27-1.46 1.5-1.46H17V4.6c-.31-.04-1.27-.13-2.39-.13-2.36 0-3.97 1.44-3.97 4.07v2.27H8v3h2.64V21h2.86z"/>
-              </svg>
-            </a>
-            <a href="#" class="sk-contact__social" aria-label="WhatsApp">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.78-1.67-2.08-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.5 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35zM12 2C6.48 2 2 6.48 2 12c0 1.97.57 3.81 1.55 5.36L2 22l4.78-1.52A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
+                <path d="M16.5 3h-3v12.25a2.75 2.75 0 1 1-2.75-2.75c.28 0 .55.04.8.12V9.55a5.75 5.75 0 1 0 4.95 5.7V8.84a6.6 6.6 0 0 0 4 1.35V7.13a3.7 3.7 0 0 1-2.7-1.16A3.7 3.7 0 0 1 16.5 3z"/>
               </svg>
             </a>
           </div>
@@ -1726,13 +2144,26 @@
       const menu   = document.getElementById('sk-mobile');
       if (!burger || !menu) return;
 
+      // Watermark animation cycle = 4400ms (last "E" lights up white at this moment)
+      const WM_CYCLE_MS = 4300;
+
       let autoCloseTimer = null;
       function clearAutoClose() {
         if (autoCloseTimer) { clearTimeout(autoCloseTimer); autoCloseTimer = null; }
       }
       function scheduleAutoClose() {
         clearAutoClose();
-        autoCloseTimer = setTimeout(function () { setOpen(false); }, 5000);
+        autoCloseTimer = setTimeout(function () { setOpen(false); }, WM_CYCLE_MS);
+      }
+
+      function restartWatermark() {
+        const letters = menu.querySelectorAll('.sk-mobile__watermark span');
+        letters.forEach(function (el) {
+          el.style.animation = 'none';
+          // force reflow so the animation restarts from 0
+          void el.offsetWidth;
+          el.style.animation = '';
+        });
       }
 
       function setOpen(open) {
@@ -1742,8 +2173,8 @@
         burger.setAttribute('aria-expanded', String(open));
         burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
         menu.setAttribute('aria-hidden', String(!open));
-        if (open) scheduleAutoClose();
-        else      clearAutoClose();
+        if (open) { restartWatermark(); scheduleAutoClose(); }
+        else      { clearAutoClose(); }
       }
 
       burger.addEventListener('click', function () {
@@ -1766,6 +2197,79 @@
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') setOpen(false);
       });
+    })();
+
+    /* Scrollspy: highlight active nav link based on visible section */
+    (function () {
+      const links = document.querySelectorAll('.sk-nav__link');
+      if (!links.length || !('IntersectionObserver' in window)) return;
+
+      const map = new Map();
+      links.forEach(function (link) {
+        const id = link.getAttribute('href');
+        if (id && id.startsWith('#')) {
+          const sec = document.querySelector(id);
+          if (sec) map.set(sec, link);
+        }
+      });
+
+      function setActive(link) {
+        links.forEach(function (l) { l.classList.remove('is-active'); });
+        if (link) link.classList.add('is-active');
+      }
+
+      const visible = new Set();
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) visible.add(e.target);
+          else visible.delete(e.target);
+        });
+        // Pick the topmost visible section
+        let top = null;
+        visible.forEach(function (sec) {
+          if (!top || sec.getBoundingClientRect().top < top.getBoundingClientRect().top) {
+            top = sec;
+          }
+        });
+        setActive(top ? map.get(top) : null);
+      }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+      map.forEach(function (_, sec) { observer.observe(sec); });
+    })();
+
+    /* Header auto-hide on scroll down, show on scroll up (all devices) */
+    (function () {
+      const header = document.querySelector('.sk-header');
+      const menu   = document.getElementById('sk-mobile');
+      if (!header) return;
+
+      let lastY = window.scrollY;
+      let ticking = false;
+      const THRESHOLD = 8;
+
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          const y = window.scrollY;
+          const delta = y - lastY;
+
+          if (menu && menu.classList.contains('is-open')) {
+            header.classList.remove('is-hidden');
+          } else if (Math.abs(delta) > THRESHOLD) {
+            if (delta > 0 && y > 80) {
+              header.classList.add('is-hidden');     // scrolling down
+            } else if (delta < 0) {
+              header.classList.remove('is-hidden');  // scrolling up
+            }
+          }
+
+          lastY = y;
+          ticking = false;
+        });
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
     })();
 
     /* Projects: floating preview that follows the cursor */
@@ -1799,6 +2303,66 @@
         const y = e.clientY - rect.top;
         preview.style.left = x + 'px';
         preview.style.top  = y + 'px';
+      });
+    })();
+
+    /* ---------- MOBILE SCROLL REVEAL (phones only) ---------- */
+    (function () {
+      const mqMobile  = window.matchMedia('(max-width: 767px)');
+      const mqReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (!mqMobile.matches || mqReduced.matches) return;
+      if (!('IntersectionObserver' in window)) return;
+
+      // [selector, optional stagger=true]
+      const targets = [
+        ['.sk-services__label'],
+        ['.sk-services__title'],
+        ['.sk-services__sub'],
+        ['.sk-srv', true],
+        ['.sk-projects__label'],
+        ['.sk-projects__title'],
+        ['.sk-projects__sub'],
+        ['.sk-project', true],
+        ['.sk-about__label'],
+        ['.sk-about__title'],
+        ['.sk-about__text'],
+        ['.sk-value', true],
+        ['.sk-contact__label'],
+        ['.sk-contact__eyebrow'],
+        ['.sk-contact__title'],
+        ['.sk-contact__card', true],
+        ['.sk-contact__bottom'],
+      ];
+
+      targets.forEach(function (entry) {
+        const sel = entry[0];
+        const stagger = !!entry[1];
+        document.querySelectorAll(sel).forEach(function (el, i) {
+          el.classList.add('sk-reveal');
+          if (stagger) {
+            const idx = Math.min(i + 1, 6);
+            el.classList.add('sk-reveal--d' + idx);
+          }
+        });
+      });
+
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+
+      document.querySelectorAll('.sk-reveal').forEach(function (el) {
+        // If already in view on load, reveal immediately (no delay flicker)
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.95 && r.bottom > 0) {
+          requestAnimationFrame(function () { el.classList.add('is-in'); });
+        } else {
+          io.observe(el);
+        }
       });
     })();
   </script>
