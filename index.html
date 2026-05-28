@@ -11,7 +11,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- Lucide icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 
@@ -22,8 +22,8 @@
     }
     *{ -webkit-font-smoothing:antialiased; }
     html{ scroll-behavior:smooth; }
-    body{ font-family:'Inter',system-ui,sans-serif; background:var(--ink); color:#e7e7ea; }
-    h1,h2,h3,h4,.display{ font-family:'Bebas Neue',Inter,sans-serif; letter-spacing:.02em; }
+    body{ font-family:'Plus Jakarta Sans',system-ui,sans-serif; background:var(--ink); color:#e7e7ea; font-feature-settings:"ss01","cv01"; }
+    h1,h2,h3,h4,.display{ font-family:'Oswald','Plus Jakarta Sans',sans-serif; font-weight:600; letter-spacing:.01em; text-transform:uppercase; }
 
     .container-x{ max-width:1240px; margin-inline:auto; padding-inline:1rem; }
     @media (min-width:768px){ .container-x{ padding-inline:1.5rem; } }
@@ -70,7 +70,7 @@
     .tile:hover img{ transform:scale(1.08); }
     .tile-overlay{ position:absolute; inset:0; background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.85) 100%); display:flex; align-items:flex-end; padding:1.25rem; }
 
-    .stat-num{ font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,5vw,4.2rem); color:var(--brand); line-height:1; }
+    .stat-num{ font-family:'Oswald',sans-serif; font-weight:600; font-size:clamp(2rem,5vw,4.2rem); color:var(--brand); line-height:1; letter-spacing:.01em; }
 
     .marquee{ overflow:hidden; white-space:nowrap; border-block:1px solid var(--line); background:#0e0f12; }
     .marquee-track{ display:inline-block; animation:marquee 28s linear infinite; padding-block:1rem; }
@@ -113,7 +113,7 @@
       display:flex; align-items:center; gap:1rem;
       padding:1rem 1.5rem;
       color:#fff; text-decoration:none;
-      font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:.05em;
+      font-family:'Oswald',sans-serif; font-weight:600; font-size:1.4rem; letter-spacing:.04em; text-transform:uppercase;
       border-left:3px solid transparent;
       transform:translateX(-12px); opacity:0;
       transition: background .25s ease, color .25s ease, border-color .25s ease, transform .45s ease, opacity .45s ease;
@@ -130,27 +130,46 @@
     .mobile-menu .m-item:hover .m-arrow{ opacity:1; transform:translateX(4px); }
     .mobile-menu .m-cta{ margin:1rem 1.5rem 1.25rem; }
 
-    /* Animated hamburger */
+    /* I-Beam steel menu button */
     .burger{
-      position:relative; width:48px; height:48px;
+      position:relative; width:54px; height:54px;
       display:inline-flex; align-items:center; justify-content:center;
-      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15);
-      border-radius:6px; cursor:pointer; transition:all .25s ease;
+      background:transparent;
+      border:none; cursor:pointer; padding:0;
+      transition: transform .3s ease;
     }
-    .burger:hover{ background:var(--brand); border-color:var(--brand); }
-    .burger-box{ position:relative; width:22px; height:16px; }
-    .burger-line{
-      position:absolute; left:0; width:100%; height:2px;
-      background:#fff; border-radius:2px;
-      transition:transform .35s cubic-bezier(.65,.05,.36,1), top .35s ease, opacity .2s ease, width .35s ease;
+    /* Diamond accent frame */
+    .burger::before{
+      content:""; position:absolute; inset:6px;
+      border:1.5px solid rgba(255,255,255,.25);
+      transform:rotate(45deg);
+      transition: border-color .35s ease, transform .5s cubic-bezier(.65,.05,.36,1), inset .35s ease;
     }
-    .burger-line:nth-child(1){ top:0; }
-    .burger-line:nth-child(2){ top:7px; width:70%; }
-    .burger-line:nth-child(3){ top:14px; }
-    .burger:hover .burger-line:nth-child(2){ width:100%; }
-    .burger.is-open .burger-line:nth-child(1){ top:7px; transform:rotate(45deg); }
-    .burger.is-open .burger-line:nth-child(2){ opacity:0; }
-    .burger.is-open .burger-line:nth-child(3){ top:7px; transform:rotate(-45deg); }
+    .burger::after{
+      content:""; position:absolute; inset:6px;
+      background:var(--brand);
+      transform:rotate(45deg) scale(0);
+      transition: transform .45s cubic-bezier(.34,1.56,.64,1);
+      z-index:-1;
+    }
+    .burger:hover::before{ border-color:var(--brand); transform:rotate(135deg); }
+    .burger:hover::after{ transform:rotate(45deg) scale(1); }
+    .burger:active{ transform:scale(.94); }
+
+    .burger-icon{ position:relative; width:24px; height:24px; z-index:1; }
+    .burger-icon svg{
+      position:absolute; inset:0; width:100%; height:100%;
+      stroke:#fff; stroke-width:2.2; fill:none;
+      stroke-linecap:square; stroke-linejoin:miter;
+      transition: opacity .35s ease, transform .5s cubic-bezier(.65,.05,.36,1), stroke .3s ease;
+    }
+    .burger .icon-hat{ opacity:1; transform:rotate(0) scale(1); }
+    .burger .icon-x{ opacity:0; transform:rotate(-180deg) scale(.5); }
+    .burger.is-open .icon-hat{ opacity:0; transform:rotate(180deg) scale(.5); }
+    .burger.is-open .icon-x{ opacity:1; transform:rotate(0) scale(1); }
+    .burger.is-open::before{ border-color:var(--brand); transform:rotate(135deg); }
+    .burger.is-open::after{ transform:rotate(45deg) scale(1); }
+    .burger:hover svg, .burger.is-open svg{ stroke:#0b0b0d; }
   </style>
 </head>
 <body>
@@ -162,29 +181,38 @@
         <span class="inline-block w-8 h-8 bg-orange-500" style="clip-path:polygon(0 0,100% 0,80% 100%,0 100%)"></span>
         <span class="display text-2xl tracking-wider">FERRUM<span class="text-orange-500">.</span></span>
       </a>
-      <nav class="hidden md:flex items-center gap-8 text-white/80">
+      <nav class="hidden lg:flex items-center gap-7 xl:gap-9 text-white/80 whitespace-nowrap">
         <a class="nav-link hover:text-white" href="#home">Ballina</a>
         <a class="nav-link hover:text-white" href="#about">Rreth Nesh</a>
         <a class="nav-link hover:text-white" href="#products">Produktet</a>
         <a class="nav-link hover:text-white" href="#projects">Projektet</a>
         <a class="nav-link hover:text-white" href="#contact">Kontakti</a>
       </nav>
-      <a href="#contact" class="hidden md:inline-flex btn btn-primary">Bisedo me Ne <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
-      <button id="burger" class="burger md:hidden" aria-label="Menu" aria-expanded="false">
-        <span class="burger-box">
-          <span class="burger-line"></span>
-          <span class="burger-line"></span>
-          <span class="burger-line"></span>
+      <a href="#contact" class="hidden lg:inline-flex btn btn-primary">Bisedo me Ne <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      <button id="burger" class="burger lg:hidden" aria-label="Menu" aria-expanded="false">
+        <span class="burger-icon">
+          <!-- I-Beam (steel) icon -->
+          <svg class="icon-hat" viewBox="0 0 24 24">
+            <path d="M4 5h16"/>
+            <path d="M4 19h16"/>
+            <path d="M10 5v14"/>
+            <path d="M14 5v14"/>
+          </svg>
+          <!-- Close X icon -->
+          <svg class="icon-x" viewBox="0 0 24 24">
+            <path d="M6 6l12 12"/>
+            <path d="M18 6L6 18"/>
+          </svg>
         </span>
       </button>
     </div>
-    <div id="mobileMenu" class="mobile-menu md:hidden">
+    <div id="mobileMenu" class="mobile-menu lg:hidden">
       <ul>
-        <li><a class="m-item" href="#home"><span class="m-num">01</span>Ballina<i data-lucide="arrow-up-right" class="m-arrow w-5 h-5"></i></a></li>
-        <li><a class="m-item" href="#about"><span class="m-num">02</span>Rreth Nesh<i data-lucide="arrow-up-right" class="m-arrow w-5 h-5"></i></a></li>
-        <li><a class="m-item" href="#products"><span class="m-num">03</span>Produktet<i data-lucide="arrow-up-right" class="m-arrow w-5 h-5"></i></a></li>
-        <li><a class="m-item" href="#projects"><span class="m-num">04</span>Projektet<i data-lucide="arrow-up-right" class="m-arrow w-5 h-5"></i></a></li>
-        <li><a class="m-item" href="#contact"><span class="m-num">05</span>Kontakti<i data-lucide="arrow-up-right" class="m-arrow w-5 h-5"></i></a></li>
+        <li><a class="m-item" href="#home">Ballina<i data-lucide="arrow-up-right" class="m-arrow w-5 h-5"></i></a></li>
+        <li><a class="m-item" href="#about">Rreth Nesh<i data-lucide="arrow-up-right" class="m-arrow w-5 h-5"></i></a></li>
+        <li><a class="m-item" href="#products">Produktet<i data-lucide="arrow-up-right" class="m-arrow w-5 h-5"></i></a></li>
+        <li><a class="m-item" href="#projects">Projektet<i data-lucide="arrow-up-right" class="m-arrow w-5 h-5"></i></a></li>
+        <li><a class="m-item" href="#contact">Kontakti<i data-lucide="arrow-up-right" class="m-arrow w-5 h-5"></i></a></li>
       </ul>
       <a href="#contact" class="btn btn-primary m-cta justify-center">Bisedo me Ne <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
     </div>
@@ -193,13 +221,13 @@
   <!-- HERO -->
   <section id="home" class="hero">
     <div class="container-x relative z-10">
-      <div class="max-w-3xl">
+      <div class="max-w-4xl">
         <span class="kicker reveal">Çelik për Përforcim · Që nga 2008</span>
-        <h1 class="reveal display text-white text-[clamp(2.5rem,9vw,6.5rem)] leading-[0.95] mt-5">
-          Të bën më <span class="text-orange-500">të fortë.</span><br/>
-          Ndërton <span class="text-orange-500">të ardhmen.</span>
+        <h1 class="reveal display text-white text-[clamp(2.5rem,7.5vw,5.75rem)] leading-[.95] mt-5 tracking-tight">
+          <span class="block">Të bën më <span class="text-orange-500">të fortë.</span></span>
+          <span class="block mt-1 md:mt-2">Ndërton <span class="text-orange-500">të ardhmen.</span></span>
         </h1>
-        <p class="reveal text-white/75 text-base sm:text-lg mt-6 max-w-xl">
+        <p class="reveal text-white/75 text-base sm:text-lg md:text-xl mt-6 md:mt-8 max-w-2xl leading-relaxed">
           Nga rrokaqiejt e lartë te urat me hapësira të gjata — ne projektojmë dhe furnizojmë
           përforcimin që mban të bashkuar botën moderne.
         </p>
@@ -211,7 +239,7 @@
         <!-- mini stats -->
         <div class="reveal grid grid-cols-3 gap-3 sm:gap-6 mt-10 sm:mt-14 max-w-xl">
           <div><div class="stat-num"><span data-count="250" data-suffix="t">0</span></div><p class="text-[10px] sm:text-xs uppercase tracking-widest text-white/60 mt-1">Prodhim Ditor</p></div>
-          <div><div class="stat-num"><span data-count="15" data-suffix="k m²">0</span></div><p class="text-[10px] sm:text-xs uppercase tracking-widest text-white/60 mt-1">Fabrika</p></div>
+          <div><div class="stat-num"><span data-count="15" data-suffix="k">0</span></div><p class="text-[10px] sm:text-xs uppercase tracking-widest text-white/60 mt-1">m² Fabrika</p></div>
           <div><div class="stat-num"><span data-count="120" data-suffix="+">0</span></div><p class="text-[10px] sm:text-xs uppercase tracking-widest text-white/60 mt-1">Projekte</p></div>
         </div>
       </div>
@@ -249,11 +277,11 @@
           Me një fabrikë prodhimi prej 15.000 m² dhe një kapacitet prej 250 tonësh në ditë, kombinojmë makineri të avancuara me
           një ekip shumë të kualifikuar për të ofruar zgjidhje të qëndrueshme dhe në kohë.
         </p>
-        <div class="grid sm:grid-cols-2 gap-4 mt-8">
-          <div class="flex gap-3"><i data-lucide="check-circle-2" class="text-orange-500 mt-1"></i><div><div class="text-white font-semibold">I Certifikuar ISO</div><div class="text-white/60 text-sm">Cilësi që mund ta verifikoni.</div></div></div>
-          <div class="flex gap-3"><i data-lucide="truck" class="text-orange-500 mt-1"></i><div><div class="text-white font-semibold">Dorëzim në Kohë</div><div class="text-white/60 text-sm">Logjistikë sipas oraritit të kantierit.</div></div></div>
-          <div class="flex gap-3"><i data-lucide="leaf" class="text-orange-500 mt-1"></i><div><div class="text-white font-semibold">I Qëndrueshëm</div><div class="text-white/60 text-sm">Prodhim me karbon të reduktuar.</div></div></div>
-          <div class="flex gap-3"><i data-lucide="users" class="text-orange-500 mt-1"></i><div><div class="text-white font-semibold">Ekip Ekspert</div><div class="text-white/60 text-sm">Inxhinierë në çdo porosi.</div></div></div>
+        <div class="grid grid-cols-2 gap-4 mt-8">
+          <div class="flex gap-3"><i data-lucide="check-circle-2" class="text-orange-500 mt-1 shrink-0"></i><div><div class="text-white font-semibold">I Certifikuar ISO</div><div class="text-white/60 text-sm">Cilësi që mund ta verifikoni.</div></div></div>
+          <div class="flex gap-3"><i data-lucide="truck" class="text-orange-500 mt-1 shrink-0"></i><div><div class="text-white font-semibold">Dorëzim në Kohë</div><div class="text-white/60 text-sm">Logjistikë sipas oraritit të kantierit.</div></div></div>
+          <div class="flex gap-3"><i data-lucide="leaf" class="text-orange-500 mt-1 shrink-0"></i><div><div class="text-white font-semibold">I Qëndrueshëm</div><div class="text-white/60 text-sm">Prodhim me karbon të reduktuar.</div></div></div>
+          <div class="flex gap-3"><i data-lucide="users" class="text-orange-500 mt-1 shrink-0"></i><div><div class="text-white font-semibold">Ekip Ekspert</div><div class="text-white/60 text-sm">Inxhinierë në çdo porosi.</div></div></div>
         </div>
         <a href="#contact" class="btn btn-primary mt-9">Punoni me Ne <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
       </div>
@@ -370,11 +398,6 @@
         <h2 class="section-title display text-4xl sm:text-5xl md:text-6xl text-white mt-4">Gati të ndërtoni diçka që zgjat?</h2>
         <p class="text-white/70 mt-6 max-w-md">Na tregoni për projektin tuaj — materiali, tonazhi, afati — dhe do t'ju kthejmë përgjigje brenda 24 orëve me një ofertë të detajuar.</p>
 
-        <div class="mt-10 space-y-5 text-white/80">
-          <div class="flex items-center gap-4"><span class="w-10 h-10 grid place-items-center bg-orange-500/15 text-orange-500"><i data-lucide="map-pin"></i></span> Zona Industriale, Ndërtesa 12, Prishtinë</div>
-          <div class="flex items-center gap-4"><span class="w-10 h-10 grid place-items-center bg-orange-500/15 text-orange-500"><i data-lucide="phone"></i></span> +383 44 123 456</div>
-          <div class="flex items-center gap-4"><span class="w-10 h-10 grid place-items-center bg-orange-500/15 text-orange-500"><i data-lucide="mail"></i></span> hello@ferrumsteel.co</div>
-        </div>
       </div>
 
       <div class="reveal grid sm:grid-cols-1 gap-5">
