@@ -38,7 +38,7 @@
       padding-top:6rem; padding-bottom:3rem;
       background:
         linear-gradient(115deg, rgba(11,11,13,.92) 0%, rgba(11,11,13,.6) 45%, rgba(11,11,13,.25) 100%),
-        url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+        url('images/Rruga Tirana Tranzit.jpeg') center/cover no-repeat;
     }
     @media (min-width:768px){ .hero{ min-height:92vh; padding-top:0; padding-bottom:0; } }
     .hero::after{
@@ -47,7 +47,6 @@
     }
 
     .kicker{ display:inline-flex; align-items:center; gap:.6rem; font-size:.72rem; letter-spacing:.3em; text-transform:uppercase; color:var(--brand); }
-    .kicker::before{ content:""; width:32px; height:2px; background:var(--brand); }
 
     .btn{ display:inline-flex; align-items:center; gap:.55rem; padding:.8rem 1.25rem; border-radius:2px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; font-size:.75rem; transition:all .25s ease; white-space:nowrap; }
     @media (min-width:768px){ .btn{ padding:.9rem 1.5rem; font-size:.78rem; } }
@@ -409,15 +408,18 @@
 
   <!-- NAV -->
   <header id="siteHeader" class="site-header">
-    <div class="container-x flex items-center justify-between py-5">
+    <div class="container-x flex items-center justify-between py-3">
       <a href="#" class="flex items-center gap-2">
-        <span class="inline-block w-8 h-8 bg-orange-500" style="clip-path:polygon(0 0,100% 0,80% 100%,0 100%)"></span>
-        <span class="display text-2xl tracking-wider">3AM<span class="text-orange-500">.</span></span>
+        <img src="images/WhatsApp_Image_2026-05-29_at_22.43.20-removebg-preview.png" alt="3AM Logo" class="w-20 h-20 object-contain filter brightness-110 contrast-125 saturate-110"/>
+        <div class="flex flex-col">
+          <span class="display text-2xl tracking-wider text-white">3AM</span>
+          <span class="text-xs uppercase tracking-widest text-orange-500">construction</span>
+        </div>
       </a>
       <nav class="hidden lg:flex items-center gap-7 xl:gap-9 text-white/80 whitespace-nowrap">
         <a class="nav-link hover:text-white" href="#home">Ballina</a>
         <a class="nav-link hover:text-white" href="#about">Rreth Nesh</a>
-        <a class="nav-link hover:text-white" href="#products">Produktet</a>
+        <a class="nav-link hover:text-white" href="#products">Shërbimet</a>
         <a class="nav-link hover:text-white" href="#gallery">Galeria</a>
         <a class="nav-link hover:text-white" href="#projects">Projektet</a>
       </nav>
@@ -443,7 +445,7 @@
       <ul>
         <li><a class="m-item" href="#home">Ballina<i data-lucide="arrow-up-right" class="m-arrow w-5 h-5"></i></a></li>
         <li><a class="m-item" href="#about">Rreth Nesh<i data-lucide="arrow-up-right" class="m-arrow w-5 h-5"></i></a></li>
-        <li><a class="m-item" href="#products">Produktet<i data-lucide="arrow-up-right" class="m-arrow w-5 h-5"></i></a></li>
+        <li><a class="m-item" href="#products">Shërbimet<i data-lucide="arrow-up-right" class="m-arrow w-5 h-5"></i></a></li>
         <li><a class="m-item" href="#gallery">Galeria<i data-lucide="arrow-up-right" class="m-arrow w-5 h-5"></i></a></li>
         <li><a class="m-item" href="#projects">Projektet<i data-lucide="arrow-up-right" class="m-arrow w-5 h-5"></i></a></li>
       </ul>
@@ -455,25 +457,23 @@
   <section id="home" class="hero">
     <div class="container-x relative z-10">
       <div class="max-w-4xl">
-        <span class="kicker reveal">Çelik për Përforcim · Që nga 2008</span>
+        <span class="kicker reveal">Që nga 2012</span>
         <h1 class="reveal display text-white text-[clamp(2.5rem,7.5vw,5.75rem)] leading-[.95] mt-5 tracking-tight">
-          <span class="block">Të bën më <span class="text-orange-500">të fortë.</span></span>
-          <span class="block mt-3 md:mt-5">Ndërton <span class="text-orange-500">të ardhmen.</span></span>
+          <span class="block">3AM <span class="text-orange-500">CONSTRUCTION</span></span>
+          <span class="block mt-3 md:mt-5">Projekte që <span class="text-orange-500">zgjasin.</span></span>
         </h1>
         <p class="reveal text-white/75 text-base sm:text-lg md:text-xl mt-6 md:mt-8 max-w-2xl leading-relaxed">
-          Nga rrokaqiejt e lartë te urat me hapësira të gjata — ne projektojmë dhe furnizojmë
-          përforcimin që mban të bashkuar botën moderne.
+          Ne projektojmë dhe furnizojmë përforcimin që mban të sigurta objektet moderne.
         </p>
         <div class="reveal mt-9 flex flex-wrap gap-3">
-          <a href="#products" class="btn btn-primary">Shiko Produktet <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          <a href="#products" class="btn btn-primary">Shërbimet <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
           <a href="#projects" class="btn btn-ghost">Projektet Tona</a>
         </div>
 
         <!-- mini stats -->
-        <div class="reveal grid grid-cols-3 gap-3 sm:gap-6 mt-10 sm:mt-14 max-w-xl">
-          <div><div class="stat-num"><span data-count="250" data-suffix="T">0</span></div><p class="text-[10px] sm:text-xs uppercase tracking-widest text-white/60 mt-1">Prodhim Ditor</p></div>
-          <div><div class="stat-num"><span data-count="15" data-suffix="K">0</span></div><p class="text-[10px] sm:text-xs uppercase tracking-widest text-white/60 mt-1">m² Fabrika</p></div>
+        <div class="reveal mt-10 sm:mt-14 flex flex-wrap gap-3 sm:gap-6 max-w-xl">
           <div><div class="stat-num"><span data-count="120" data-suffix="+">0</span></div><p class="text-[10px] sm:text-xs uppercase tracking-widest text-white/60 mt-1">Projekte</p></div>
+          <div><div class="stat-num"><span data-count="15" data-suffix="K">0</span></div><p class="text-[10px] sm:text-xs uppercase tracking-widest text-white/60 mt-1">m² Fabrika</p></div>
         </div>
       </div>
     </div>
@@ -486,22 +486,20 @@
 
   <!-- LOGO MARQUEE -->
   <div class="marquee">
-    <span class="marquee-badge hidden md:inline-flex"><i data-lucide="award" class="w-3 h-3"></i>Klientët</span>
+    <span class="marquee-badge hidden md:inline-flex"><i data-lucide="award" class="w-3 h-3"></i>Partneret</span>
     <div class="marquee-track">
-      <span class="marquee-item">Prishtina Mall<span class="marquee-dot"></span></span>
-      <span class="marquee-item">Dukagjini Center<span class="marquee-dot"></span></span>
-      <span class="marquee-item">Baci Towers<span class="marquee-dot"></span></span>
-      <span class="marquee-item">Trion Invest<span class="marquee-dot"></span></span>
-      <span class="marquee-item">VA Residence<span class="marquee-dot"></span></span>
-      <span class="marquee-item">Bajgora Wind Farm<span class="marquee-dot"></span></span>
-      <span class="marquee-item">Agullimi<span class="marquee-dot"></span></span>
-      <span class="marquee-item">Prishtina Mall<span class="marquee-dot"></span></span>
-      <span class="marquee-item">Dukagjini Center<span class="marquee-dot"></span></span>
-      <span class="marquee-item">Baci Towers<span class="marquee-dot"></span></span>
-      <span class="marquee-item">Trion Invest<span class="marquee-dot"></span></span>
-      <span class="marquee-item">VA Residence<span class="marquee-dot"></span></span>
-      <span class="marquee-item">Bajgora Wind Farm<span class="marquee-dot"></span></span>
-      <span class="marquee-item">Agullimi<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Rinori<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Centrum Residenc<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Far Invest<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Art Corporation<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Euro Asphalt<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Mili-R<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Rinori<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Centrum Residenc<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Far Invest<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Art Corporation<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Euro Asphalt<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Mili-R<span class="marquee-dot"></span></span>
     </div>
   </div>
 
@@ -509,25 +507,26 @@
   <section id="about" class="py-16 md:py-24">
     <div class="container-x grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
       <div class="reveal relative">
-        <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1400&q=80" alt="Construction worker" class="w-full h-[320px] sm:h-[420px] lg:h-[520px] object-cover">
+        <img src="images/Rruga Tirana Tranzit.jpeg" alt="Construction worker" class="w-full h-[320px] sm:h-[420px] lg:h-[520px] object-cover">
         <div class="absolute -bottom-6 -right-6 bg-orange-500 text-black px-6 py-5 hidden md:block">
-          <div class="display text-5xl leading-none">15+</div>
+          <div class="display text-5xl leading-none">14+</div>
           <div class="text-xs uppercase tracking-widest mt-1">Vite Ndërtimi</div>
         </div>
       </div>
       <div class="reveal">
         <span class="kicker">Rreth Nesh</span>
-        <h2 class="section-title display text-4xl sm:text-5xl md:text-6xl text-white mt-4">Partneri juaj i besuar në ndërtimin modern.</h2>
+        <h2 class="section-title display text-4xl sm:text-5xl md:text-6xl text-white mt-4">3AM CONSTRUCTION — rreth nesh.</h2>
         <p class="text-white/70 mt-6 leading-relaxed">
-          Jemi lider në cilësinë e ndërtimit, duke furnizuar me çelik për përforcim disa nga projektet më të mëdha në rajon.
-          Me një fabrikë prodhimi prej 15.000 m² dhe një kapacitet prej 250 tonësh në ditë, kombinojmë makineri të avancuara me
-          një ekip shumë të kualifikuar për të ofruar zgjidhje të qëndrueshme dhe në kohë.
+          Ndërtojmë me profesionalizëm, projektojmë me vizion dhe monitorojmë çdo detaj deri në perfeksion. Me përkushtim maksimal ndaj cilësisë, sigurisë dhe standardeve moderne, ofrojmë zgjidhje të plota në fushën e ndërtimit, projektimit dhe mbikëqyrjes së punimeve.
+        </p>
+        <p class="text-white/70 mt-4 leading-relaxed">
+          Çdo projekt për ne është përgjegjësi, seriozitet dhe punë që flet vetë. 3AM CONSTRUCTION — besim, kualitet dhe korrektësi në çdo hap.
         </p>
         <div class="grid grid-cols-2 gap-4 mt-8">
-          <div class="flex gap-3"><i data-lucide="check-circle-2" class="text-orange-500 mt-1 shrink-0"></i><div><div class="text-white font-semibold">I Certifikuar ISO</div><div class="text-white/60 text-sm">Cilësi që mund ta verifikoni.</div></div></div>
-          <div class="flex gap-3"><i data-lucide="truck" class="text-orange-500 mt-1 shrink-0"></i><div><div class="text-white font-semibold">Dorëzim në Kohë</div><div class="text-white/60 text-sm">Logjistikë sipas oraritit të kantierit.</div></div></div>
-          <div class="flex gap-3"><i data-lucide="leaf" class="text-orange-500 mt-1 shrink-0"></i><div><div class="text-white font-semibold">I Qëndrueshëm</div><div class="text-white/60 text-sm">Prodhim me karbon të reduktuar.</div></div></div>
-          <div class="flex gap-3"><i data-lucide="users" class="text-orange-500 mt-1 shrink-0"></i><div><div class="text-white font-semibold">Ekip Ekspert</div><div class="text-white/60 text-sm">Inxhinierë në çdo porosi.</div></div></div>
+          <div class="flex gap-3"><i data-lucide="check-circle-2" class="text-orange-500 mt-1 shrink-0"></i><div><div class="text-white font-semibold">Standarde të Certifikuara</div><div class="text-white/60 text-sm">Punojmë sipas normave dhe procedurave të miratuara ndërkombëtarisht.</div></div></div>
+          <div class="flex gap-3"><i data-lucide="truck" class="text-orange-500 mt-1 shrink-0"></i><div><div class="text-white font-semibold">Afate të Respektuara</div><div class="text-white/60 text-sm">Planifikim dhe dorëzim pune në kohë, sipas marrëveshjes me klientin.</div></div></div>
+          <div class="flex gap-3"><i data-lucide="leaf" class="text-orange-500 mt-1 shrink-0"></i><div><div class="text-white font-semibold">Qasje e Qëndrueshme</div><div class="text-white/60 text-sm">Zgjedhim materiale dhe procese që ulin ndikimin në mjedis.</div></div></div>
+          <div class="flex gap-3"><i data-lucide="users" class="text-orange-500 mt-1 shrink-0"></i><div><div class="text-white font-semibold">Ekip Profesional</div><div class="text-white/60 text-sm">Inxhinierë dhe specialistë me përvojë në çdo fazë të projektit.</div></div></div>
         </div>
         <a href="#contact" class="btn btn-primary mt-9">Punoni me Ne <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
       </div>
@@ -539,36 +538,36 @@
     <div class="container-x">
       <div class="reveal max-w-2xl">
         <span class="kicker">Çfarë Bëjmë</span>
-        <h2 class="section-title display text-4xl sm:text-5xl md:text-6xl text-white mt-4">Çelik i inxhinieruar, gati për kantier.</h2>
+        <h2 class="section-title display text-4xl sm:text-5xl md:text-6xl text-white mt-4">Ne ofrojmë projektime, mbikëqyrje dhe ndërtime të ulëta &amp; të larta.</h2>
       </div>
 
       <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 mt-10 md:mt-14">
         <div class="card p-5 sm:p-7 reveal flex flex-col justify-between bg-orange-500 border-orange-500 text-black">
           <div>
             <i data-lucide="grid-3x3" class="w-7 h-7 sm:w-8 sm:h-8"></i>
-            <h3 class="display text-lg sm:text-2xl mt-4 sm:mt-5 leading-tight">Rrjeta Teli</h3>
-            <p class="mt-2 sm:mt-3 text-[13px] sm:text-sm opacity-80 leading-relaxed">Rrjeta përforcimi të salduara me precizion në dimensione standarde dhe të personalizuara për pllaka, mure dhe trotuare.</p>
+            <h3 class="display text-lg sm:text-2xl mt-4 sm:mt-5 leading-tight">Projektime</h3>
+            <p class="mt-2 sm:mt-3 text-[13px] sm:text-sm opacity-80 leading-relaxed">Projektim arkitektonik dhe inxhinierik për objekte banimi, afariste dhe industriale, nga ideja fillestare deri te detajet teknike.</p>
           </div>
         </div>
         <div class="card p-5 sm:p-7 reveal">
           <i data-lucide="scissors" class="text-orange-500 w-7 h-7 sm:w-8 sm:h-8"></i>
-          <h3 class="display text-lg sm:text-2xl text-white mt-4 sm:mt-5 leading-tight">Përkulje & Prerje Hekuri</h3>
-          <p class="text-white/60 mt-2 sm:mt-3 text-[13px] sm:text-sm leading-relaxed">Shufra përforcimi të prera dhe të përkulura me CNC sipas planit tuaj — të etiketuara dhe gati për kantier.</p>
+          <h3 class="display text-lg sm:text-2xl text-white mt-4 sm:mt-5 leading-tight">Mbikëqyrje</h3>
+          <p class="text-white/60 mt-2 sm:mt-3 text-[13px] sm:text-sm leading-relaxed">Mbikëqyrje profesionale e punimeve në kantier për të siguruar zbatim sipas projektit, standardeve dhe afateve të marrëveshura.</p>
         </div>
         <div class="card p-5 sm:p-7 reveal">
           <i data-lucide="layers" class="text-orange-500 w-7 h-7 sm:w-8 sm:h-8"></i>
-          <h3 class="display text-lg sm:text-2xl text-white mt-4 sm:mt-5 leading-tight">Trare Rrjetorë</h3>
-          <p class="text-white/60 mt-2 sm:mt-3 text-[13px] sm:text-sm leading-relaxed">Struktura trekëndore të optimizuara për shpërndarjen e ngarkësës në pllaka dhe elementë prefabrikë.</p>
+          <h3 class="display text-lg sm:text-2xl text-white mt-4 sm:mt-5 leading-tight">Ndërtime të Ulëta</h3>
+          <p class="text-white/60 mt-2 sm:mt-3 text-[13px] sm:text-sm leading-relaxed">Ndërtim i objekteve të ulëta – shtëpi, komplekse banimi dhe hapësira biznesi – me fokus në cilësi, funksionalitet dhe siguri.</p>
         </div>
         <div class="card p-5 sm:p-7 reveal">
           <i data-lucide="circle-dot" class="text-orange-500 w-7 h-7 sm:w-8 sm:h-8"></i>
-          <h3 class="display text-lg sm:text-2xl text-white mt-4 sm:mt-5 leading-tight">Kafaze Pilotash</h3>
-          <p class="text-white/60 mt-2 sm:mt-3 text-[13px] sm:text-sm leading-relaxed">Kafaze përforcimi për pilota të prodhuara me makineri, me gjeometri të qëndrueshme për themele të thella.</p>
+          <h3 class="display text-lg sm:text-2xl text-white mt-4 sm:mt-5 leading-tight">Ndërtime të Larta</h3>
+          <p class="text-white/60 mt-2 sm:mt-3 text-[13px] sm:text-sm leading-relaxed">Realizim i ndërtimeve shumëkatëshe dhe objekteve madhore me struktura moderne dhe teknologji bashkëkohore.</p>
         </div>
         <div class="card p-5 sm:p-7 reveal">
           <i data-lucide="hard-hat" class="text-orange-500 w-7 h-7 sm:w-8 sm:h-8"></i>
-          <h3 class="display text-lg sm:text-2xl text-white mt-4 sm:mt-5 leading-tight">Çelik me Karbon të Mesëm</h3>
-          <p class="text-white/60 mt-2 sm:mt-3 text-[13px] sm:text-sm leading-relaxed">Çelik me karbon të mesëm me rezistencë të lartë për aplikime të kërkueshme strukturore dhe mekanike.</p>
+          <h3 class="display text-lg sm:text-2xl text-white mt-4 sm:mt-5 leading-tight">Cikli i Plotë i Projektit</h3>
+          <p class="text-white/60 mt-2 sm:mt-3 text-[13px] sm:text-sm leading-relaxed">Nga projekti dhe lejet, te zbatimi dhe dorëzimi final – ofrojmë menaxhim të plotë të procesit të ndërtimit.</p>
         </div>
         <div class="card p-5 sm:p-7 reveal flex flex-col justify-between bg-orange-500 border-orange-500 text-black">
           <div>
@@ -603,16 +602,16 @@
       <div class="gallery-grid reveal">
         <!-- Worker on tall building - main -->
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1400&q=80" alt="Worker on tall building" loading="lazy">
+          <img src="images/image.jpeg" alt="Worker on tall building" loading="lazy">
           <span class="gallery-corner"><i data-lucide="maximize-2" class="w-4 h-4"></i></span>
           <div class="gallery-caption">
             <span class="gallery-tag">Lartësi</span>
-            <div class="gallery-title">Punim në Lartësi</div>
+            <div class="gallery-title">Gjate Punimeve</div>
           </div>
         </div>
         <!-- Steel worker -->
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80" alt="Construction crew" loading="lazy">
+          <img src="images/hekuri.jpeg" alt="Construction crew" loading="lazy">
           <span class="gallery-corner"><i data-lucide="maximize-2" class="w-4 h-4"></i></span>
           <div class="gallery-caption">
             <span class="gallery-tag">Ekipi</span>
@@ -621,7 +620,7 @@
         </div>
         <!-- Welder -->
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1574359411659-15573a27fd0c?auto=format&fit=crop&w=1000&q=80" alt="Welder at work" loading="lazy">
+          <img src="images/image.jpeg" alt="Welder at work" loading="lazy">
           <span class="gallery-corner"><i data-lucide="maximize-2" class="w-4 h-4"></i></span>
           <div class="gallery-caption">
             <span class="gallery-tag">Saldim</span>
@@ -630,7 +629,7 @@
         </div>
         <!-- Crane / sky -->
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1000&q=80" alt="Crane at construction site" loading="lazy">
+          <img src="images/image5.jpeg" alt="Crane at construction site" loading="lazy">
           <span class="gallery-corner"><i data-lucide="maximize-2" class="w-4 h-4"></i></span>
           <div class="gallery-caption">
             <span class="gallery-tag">Vinjë</span>
@@ -643,12 +642,7 @@
 
   <!-- STATS BANNER -->
   <section class="py-14 md:py-20 relative bg-no-repeat bg-center bg-cover" style="background-image:linear-gradient(rgba(11,11,13,.85),rgba(11,11,13,.85)), url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=2000&q=80');">
-    <div class="container-x grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 text-center">
-      <div class="reveal"><div class="stat-num"><span data-count="250">0</span></div><p class="text-xs uppercase tracking-widest text-white/70 mt-2">Tonë / Ditë</p></div>
-      <div class="reveal"><div class="stat-num"><span data-count="120" data-suffix="+">0</span></div><p class="text-xs uppercase tracking-widest text-white/70 mt-2">Projekte të Përfunduara</p></div>
-      <div class="reveal"><div class="stat-num"><span data-count="15" data-suffix="k">0</span></div><p class="text-xs uppercase tracking-widest text-white/70 mt-2">m² Fabrikë</p></div>
-      <div class="reveal"><div class="stat-num"><span data-count="98" data-suffix="%">0</span></div><p class="text-xs uppercase tracking-widest text-white/70 mt-2">Dorëzim në Kohë</p></div>
-    </div>
+    <div class="container-x h-[180px] md:h-[260px] lg:h-[300px]"></div>
   </section>
 
   <!-- PROJECTS -->
@@ -657,23 +651,22 @@
       <div class="reveal flex flex-wrap items-end justify-between gap-6">
         <div class="max-w-xl">
           <span class="kicker">Punë të Zgjedhura</span>
-          <h2 class="section-title display text-4xl sm:text-5xl md:text-6xl text-white mt-4">Objekte madhore që ndihmuam t'i ndërtohen.</h2>
+          <h2 class="section-title display text-4xl sm:text-5xl md:text-6xl text-white mt-4">Objekte madhore që ne i ndërtuam.</h2>
         </div>
-        <a href="#contact" class="btn btn-ghost">Shiko të Gjitha <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 md:mt-14">
         <div class="tile reveal">
-          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1200&q=80" alt="">
-          <div class="tile-overlay"><div><div class="text-orange-400 text-xs uppercase tracking-widest">Komerciale</div><div class="display text-white text-3xl">Prishtina Mall</div></div></div>
+          <img src="images/PjeterBogdani .jpeg" alt="">
+          <div class="tile-overlay"><div><div class="text-orange-400 text-xs uppercase tracking-widest">Rr,PjeterBogdani</div><div class="display text-white text-3xl">Prishtine</div></div></div>
         </div>
         <div class="tile reveal">
-          <img src="https://images.unsplash.com/photo-1503387837-b154d5074bd2?auto=format&fit=crop&w=1200&q=80" alt="">
-          <div class="tile-overlay"><div><div class="text-orange-400 text-xs uppercase tracking-widest">Banimi</div><div class="display text-white text-3xl">Baci Towers</div></div></div>
+          <img src="images/KompleksiKulla.jpeg" alt="">
+          <div class="tile-overlay"><div><div class="text-orange-400 text-xs uppercase tracking-widest">Rr,UÇK</div><div class="display text-white text-3xl">KompleksiKulla</div></div></div>
         </div>
         <div class="tile reveal">
-          <img src="https://images.unsplash.com/photo-1429497419816-9ca5cfb4571a?auto=format&fit=crop&w=1200&q=80" alt="">
-          <div class="tile-overlay"><div><div class="text-orange-400 text-xs uppercase tracking-widest">Energji</div><div class="display text-white text-3xl">Bajgora Wind Farm</div></div></div>
+          <img src="images/Rruga Tirana Tranzit.jpeg" alt="">
+          <div class="tile-overlay"><div><div class="text-orange-400 text-xs uppercase tracking-widest">Rr,Tirana</div><div class="display text-white text-3xl">Tranzit Gjakove</div></div></div>
         </div>
         <div class="tile reveal">
           <img src="https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1200&q=80" alt="">
@@ -735,7 +728,7 @@
     <div class="container-x flex flex-col items-center justify-center gap-6">
       <!-- Brand -->
       <div class="flex items-center gap-2">
-        <span class="inline-block w-8 h-8 bg-orange-500" style="clip-path:polygon(0 0,100% 0,80% 100%,0 100%)"></span>
+        <img src="images/WhatsApp_Image_2026-05-29_at_22.43.20-removebg-preview.png" alt="3AM Logo" class="w-20 h-20 object-contain"/>
         <span class="display text-2xl text-white tracking-wider">3AM<span class="text-orange-500">construction</span></span>
       </div>
 
@@ -793,6 +786,16 @@
       item.addEventListener('click', () => {
         const img = item.querySelector('img');
         const title = item.querySelector('.gallery-title')?.textContent || '';
+        if (img) openLightbox(img.src, title);
+      });
+    });
+    document.querySelectorAll('.tile').forEach(tile => {
+      tile.style.cursor = 'pointer';
+      tile.addEventListener('click', () => {
+        const img = tile.querySelector('img');
+        const overlay = tile.querySelector('.tile-overlay');
+        const titleEl = overlay?.querySelector('.display');
+        const title = titleEl?.textContent || '';
         if (img) openLightbox(img.src, title);
       });
     });
