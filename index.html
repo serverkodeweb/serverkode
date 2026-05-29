@@ -58,6 +58,10 @@
 
     .card{ background:var(--ink-2); border:1px solid var(--line); transition:all .3s ease; }
     .card:hover{ transform:translateY(-6px); border-color:var(--brand); }
+    .card.bg-orange-500{ background:#f97316 !important; border-color:#f97316 !important; color:#000 !important; }
+    .card.bg-orange-500 h3{ color:#000 !important; }
+    .card.bg-orange-500 p{ color:#000 !important; }
+    .card.bg-orange-500 i{ color:#000 !important; }
 
     /* Contact cards */
     .contact-card{
@@ -539,10 +543,12 @@
       </div>
 
       <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 mt-10 md:mt-14">
-        <div class="card p-5 sm:p-7 reveal">
-          <i data-lucide="grid-3x3" class="text-orange-500 w-7 h-7 sm:w-8 sm:h-8"></i>
-          <h3 class="display text-lg sm:text-2xl text-white mt-4 sm:mt-5 leading-tight">Rrjeta Teli</h3>
-          <p class="text-white/60 mt-2 sm:mt-3 text-[13px] sm:text-sm leading-relaxed">Rrjeta përforcimi të salduara me precizion në dimensione standarde dhe të personalizuara për pllaka, mure dhe trotuare.</p>
+        <div class="card p-5 sm:p-7 reveal flex flex-col justify-between bg-orange-500 border-orange-500 text-black">
+          <div>
+            <i data-lucide="grid-3x3" class="w-7 h-7 sm:w-8 sm:h-8"></i>
+            <h3 class="display text-lg sm:text-2xl mt-4 sm:mt-5 leading-tight">Rrjeta Teli</h3>
+            <p class="mt-2 sm:mt-3 text-[13px] sm:text-sm opacity-80 leading-relaxed">Rrjeta përforcimi të salduara me precizion në dimensione standarde dhe të personalizuara për pllaka, mure dhe trotuare.</p>
+          </div>
         </div>
         <div class="card p-5 sm:p-7 reveal">
           <i data-lucide="scissors" class="text-orange-500 w-7 h-7 sm:w-8 sm:h-8"></i>
